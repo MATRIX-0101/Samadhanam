@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "647de3d8574cef1fa75c5a0c"
+  },
+  "First_Name": "nitin",
+  "Last_Name": "NA",
+  "Email_Id": "nitin@0500",
+  "Gender": "M",
+  "Year": 2025,
+  "Hostel": "SVBH",
+  "DOB": -1986,
+  "Reg_No": 20214145,
+  "Course": "cse",
+  "Problem": "afhjashfkahsdgkhafjhadkhdshlaslhgadhahlhdshlahglasdhgladshla",
+  "Password": "abc123@"
+}]
