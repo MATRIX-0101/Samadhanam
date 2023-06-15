@@ -4,13 +4,13 @@ import styled from "styled-components"
 import loader from "../assets/loader.gif" 
 import { ToastContainer, toast } from "react-toastify"
 import axios from "axios"
-import setAvatarRoute from "../utils/APIRoutes"
+import { setAvatarRoute } from "../utils/APIRoutes"
 import {Buffer} from 'buffer'
 import "react-toastify/dist/ReactToastify.css"
 
 function SetAvatar() {
 
-    const api = "https://api.multiavatar.com/45678945";
+    const api = "https://api.multiavatar.com";
     const navigate = useNavigate();
 
     const [avatars, setAvatars] = useState([]);
@@ -26,8 +26,8 @@ function SetAvatar() {
 
     useEffect(() => {
         const setDefaultMenu = async() =>{
-            if(!localStorage.getItem("")) {
-                navigate("/menu");
+            if(!localStorage.getItem("web-chat-user")) {
+                navigate("/register");
             }
         };
         
@@ -38,44 +38,30 @@ function SetAvatar() {
             toast.error("Please select an Avatar of your choice",toastOptions);
         }
         else{
-            const user = await JSON.parse(localStorage.getItem("chat-app-user"));
-            const {data} = await axios.post(`${setAvatarRoute}/${user._id}`, {
+            console.log(`selected avatar is ${selectedAvatar}`);
+            // console.log(localStorage.getItem("web-chat-user"));
+            const user = await JSON.parse(localStorage.getItem("web-chat-user"));
+            console.log(`${user._id}`);
+
+            const url = `${setAvatarRoute}/${user._id}`;
+            console.log(url);
+
+            const {data} = await axios.post(url,{
                 image: avatars[selectedAvatar], 
             });
+
+            console.log(data);
 
             if(data.isSet) {
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
-                localStorage.setItem("chat-app-user", JSON.stringify(user));
+                localStorage.setItem("web-chat-user", JSON.stringify(user));
                 navigate("/"); 
             } else {
                 toast.error("Error in setting avatar , please try again", toastOptions);
             }
         }
     };
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const data = [];
-    //         for(let i=0; i<4 ; i++){
-    //             const image = await axios.get(
-    //                 `${api}/${Math.round(Math.random() * 1000)}`, {
-    //                     responseType: 'blob'  //Set the response typr to 'blob'
-    //                 }
-    //             );
-    //             // const buffer = Buffer.from(image.data);
-    //             const url = URL.createObjectURL(image.data);
-    //             // data.push(buffer.toString("base64"));
-    //             data.push(url);
-    //         }
-    //         setAvatars(data);
-    //         setIsLoading(false);
-    //     };
-
-    //     fetchData();
-    // }, []); // the use of this uri method result in Request failed with status code 429 
-    // // A status code of 429 is often used by servers to enforce rate limits and prevent abuse or excessive usage. It means that you need to slow down the frequency of your requests to comply with the rate limit set by the server
-
 
 
     useEffect(() => {
@@ -93,6 +79,7 @@ function SetAvatar() {
         };
 
         fetchData();
+        console.log("data fetched successful");
     }, []);
 
 
