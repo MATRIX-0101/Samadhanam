@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "react-scripts": "^2.1.3"
+  },
+  "dependencies": {
+    "add": "^2.0.6",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "react-router-dom": "^6.12.1",
+    "react-toastify": "^9.1.3"
+  }
+}
