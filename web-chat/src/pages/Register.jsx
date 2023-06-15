@@ -10,7 +10,7 @@ function Register() {
   const navigate = useNavigate();
   
   const [values,setvalues] = useState({
-    firstname:"" ,
+    firstname:"",
     lastname:"",
     password:"",
     confirmpassword:"",
@@ -52,8 +52,8 @@ function Register() {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
-        localStorage.setItem('web-chat-user',JSON.stringify(data.user));
-        navigate("/");
+        localStorage.setItem("web-chat-user",JSON.stringify(data.user));
+        navigate("/setAvatar");
       } 
        
     }
@@ -114,13 +114,13 @@ function Register() {
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
                             <input type="text" id="form3Example1m" class="form-control form-control-lg" placeholder="Firstname" name="firstname" onChange={(e) => handleChange(e)}/>
-                            <label class="form-label" for="form3Example1m">First name</label>
+                            <label class="form-label" for="form3Example1m"></label>
                           </div>
                         </div>
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
                             <input type="text" id="form3Example1n" class="form-control form-control-lg" placeholder="Lastname" name="lastname" onChange={(e) => handleChange(e)}/>
-                            <label class="form-label" for="form3Example1n">Last name</label>
+                            <label class="form-label" for="form3Example1n"></label>
                           </div>
                         </div>
                       </div>
@@ -129,20 +129,20 @@ function Register() {
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
                             <input type="password" id="form3Example1m1" class="form-control form-control-lg" placeholder="Password" name="password" onChange={(e) => handleChange(e)}/>
-                            <label class="form-label" for="form3Example1m1">Password</label>
+                            <label class="form-label" for="form3Example1m1"></label>
                           </div>
                         </div>
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
                             <input type="password" id="form3Example1n1" class="form-control form-control-lg" placeholder="Confirmpassword" name="confirmpassword" onChange={(e) => handleChange(e)}/>
-                            <label class="form-label" for="form3Example1n1">Confirm password</label>
+                            <label class="form-label" for="form3Example1n1"></label>
                           </div>
                         </div>
                       </div>
       
                       <div class="form-outline mb-4">
                         <input type="email" id="form3Example8" class="form-control form-control-lg" placeholder="Email" name="emailID" onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example8">Email Id</label>
+                        <label class="form-label" for="form3Example8"></label>
                       </div>
       
                       <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
@@ -202,22 +202,22 @@ function Register() {
       
                       <div class="form-outline mb-4">
                         <input type="text" id="form3Example9" class="form-control form-control-lg" placeholder="Phonenumber" name="phonenumber" onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example9">Phone Number</label>
+                        <label class="form-label" for="form3Example9"></label>
                       </div>
       
                       <div class="form-outline mb-4">
                         <input type="text" id="form3Example90" class="form-control form-control-lg" placeholder="Registrationnumber" name="registrationnumber" onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example90">Registration Number</label>
+                        <label class="form-label" for="form3Example90"></label>
                       </div>
       
                       <div class="form-outline mb-4">
                         <input type="text" id="form3Example99" class="form-control form-control-lg" placeholder="Course" name="course" onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example99">Course</label>
+                        <label class="form-label" for="form3Example99"></label>
                       </div>
       
                       <div class="form-outline mb-4">
                         <input type="text" id="form3Example97" class="form-control form-control-lg" placeholder="Problemsynopsis" name="problemsynopsis" onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example97">Problem Synopsis</label>
+                        <label class="form-label" for="form3Example97"></label>
                       </div>
       
                       <div class="d-flex justify-content-end pt-3">
