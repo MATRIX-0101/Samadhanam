@@ -4,9 +4,10 @@ import styled from "styled-components"
 import loader from "../assets/loader.gif" 
 import { ToastContainer, toast } from "react-toastify"
 import axios from "axios"
-import { setAvatarRoute } from "../utils/APIRoutes"
+import { setAvatarRoute } from "../utils/APIRoutes2"
 import {Buffer} from 'buffer'
 import "react-toastify/dist/ReactToastify.css"
+
 
 function SetAvatar() {
 
@@ -44,10 +45,11 @@ function SetAvatar() {
             console.log(`${user._id}`);
 
             const url = `${setAvatarRoute}/${user._id}`;
+            // const url = `${user._id}`;
             console.log(url);
 
             const {data} = await axios.post(url,{
-                image: avatars[selectedAvatar], 
+                image:avatars[selectedAvatar], 
             });
 
             console.log(data);
@@ -55,11 +57,23 @@ function SetAvatar() {
             if(data.isSet) {
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
-                localStorage.setItem("web-chat-user", JSON.stringify(user));
+                localStorage.setItem("web-chat-user", JSON.stringify(data.user));
                 navigate("/"); 
             } else {
                 toast.error("Error in setting avatar , please try again", toastOptions);
             }
+            // const updateAvatarFields = async () => {
+            //     let data = await dbConnect();
+            //     let result = await data.updateOne(
+            //         {_id: `${user._id}`},{
+            //             $set:{isAvatarImageSet: true, avatarImage: avatars[selectedAvatar]}
+            //         }
+            //     );
+            //     console.warn(data);
+            // }
+            
+            // updateAvatarFields();
+            // console.log("avatar fields updation successfull");
         }
     };
 
