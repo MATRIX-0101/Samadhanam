@@ -53,7 +53,7 @@ function Register() {
       }
       if (data.status === true) {
         localStorage.setItem("web-chat-user",JSON.stringify(data.user));
-        console.log(data.user);
+        console.log("data stored in localStorage"+data.user);
         toast.error(data.msg, toastOptions);
         navigate("/setAvatar");
       } 
