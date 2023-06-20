@@ -40,7 +40,7 @@ function SetAvatar() {
         }
         else{
             console.log(`selected avatar is ${selectedAvatar}`);
-            // console.log(localStorage.getItem("web-chat-user"));
+            console.log(localStorage.getItem("web-chat-user"));
             const user = await JSON.parse(localStorage.getItem("web-chat-user"));
             console.log(`${user._id}`);
 
@@ -57,8 +57,10 @@ function SetAvatar() {
             if(data.isSet) {
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
-                localStorage.setItem("web-chat-user", JSON.stringify(data.user));
-                navigate("/"); 
+                localStorage.setItem("web-chat-user", JSON.stringify(user));
+                console.log("avarar data stored in localStorage"+user);
+
+                navigate("/chat"); 
             } else {
                 toast.error("Error in setting avatar , please try again", toastOptions);
             }
