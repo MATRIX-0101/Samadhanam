@@ -1,7 +1,80 @@
-import React from "react";
+import React, { useState,useEffect } from "react"; 
+import { ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { loginRoute } from "../utils/APIRoutes";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  
+  const navigate = useNavigate();
+  
+  const [values,setvalues] = useState({
+    emailID:"",
+    password:"",
+
+  });
+
+  const handleSubmit =  async(event) => {
+    event.preventDefault();
+    if(handleValidation()){
+      console.log("invalidation",loginRoute);
+      const { emailID,password } = values;
+      const { data } = await axios.post(loginRoute,{
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+          'Authorization': 'JWT fefege...'
+        },
+        emailID,
+        password,
+      });
+      if (data.status === false) {
+        toast.error(data.msg, toastOptions);
+      }
+      if (data.status === true) {
+        localStorage.setItem("web-chat-user",JSON.stringify(data.user));
+        navigate("/setAvatar");
+      } 
+       
+    }
+    
+  };
+  
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseonHover: true,
+    draggable: true,
+    theme: "dark",
+  };
+  
+
+  
+  const handleValidation = () => {
+    const { emailID,password } = values;
+    if( password===""){
+      toast.error("Email and Password is required",toastOptions);
+      return false;
+    }else if(emailID===""){
+      toast.error("Email and Password is required",toastOptions);
+      return false;
+     } //else if(lastname.length>20){
+    //   toast.error("Can't accept such a long last name!!!",toastOptions);
+    //   return false;
+    // } 
+    return true;
+  };
+  
+  const handleChange = (event) => {
+      setvalues({ ...values, [event.target.name]: event.target.value});    
+  };
+   
+
   return (
+    
+    <>
+    <form onSubmit={(event) => handleSubmit(event)}>
     <div>
       {/* <!-- Pills navs --> */}
       <div className="container">
@@ -35,7 +108,7 @@ function Login() {
         </ul>
 
         <div className="form-outline mb-4">
-          <input type="email" id="loginName" className="form-control" />
+          <input type="email" id="loginName" className="form-control" name="emailID" placeholder="E-mail" onChange={(e) => handleChange(e)}/>
           <label className="form-label" for="loginName">
             Email
           </label>
@@ -43,7 +116,7 @@ function Login() {
 
         {/* <!-- Password input --> */}
         <div className="form-outline mb-4">
-          <input type="password" id="loginPassword" className="form-control" />
+          <input type="password" id="loginPassword" className="form-control" name="password" placeholder="Password" onChange={(e) => handleChange(e)}/>
           <label className="form-label" for="loginPassword">
             Password
           </label>
@@ -67,7 +140,11 @@ function Login() {
         </div>
       </div>
     </div>
-  );
+    </form>
+    <ToastContainer/>
+    </>
+    
+  )
 }
 
 export default Login;

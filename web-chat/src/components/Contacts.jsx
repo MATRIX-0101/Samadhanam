@@ -30,7 +30,7 @@ function Contacts({ contacts, currentUser}) {
                 <Container>
                     <div className="brand">
                         <img src={Logo} alt="logo" />
-                        <h3>Samadhanm</h3>
+                        <h7>welcome</h7>
                     </div>
                     <div className="contacts">
                          {
@@ -86,9 +86,10 @@ const Container = styled.div`
           img {
             height: 2rem;
           }
-          h3 {
+          h7 {
             color: white;
             text-transform: uppercase;
+            
           }
     }
     .contacts {
