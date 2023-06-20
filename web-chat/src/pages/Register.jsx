@@ -88,13 +88,17 @@ function Register() {
   const handleChange = (event) => {
       setvalues({ ...values, [event.target.name]: event.target.value});    
   };
+  const handleReset=()=>{
+    if(window.confirm("Are you sure you want to reset the form ?"))
+    document.getElementById('reg-form').reset();
+  }
    
 
   return (
     
       <>
       
-      <form onSubmit={(event) => handleSubmit(event)}>
+      <form  id="reg-form" onSubmit={(event) => handleSubmit(event)}>
       <section class="h-100 bg-dark">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -113,13 +117,13 @@ function Register() {
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
-                            <input type="text" id="form3Example1m" class="form-control form-control-lg" placeholder="Firstname" name="firstname" onChange={(e) => handleChange(e)}/>
+                            <input type="text" id="form3Example1m" class="form-control form-control-lg" placeholder="Firstname" name="firstname" required onChange={(e) => handleChange(e)}/>
                             <label class="form-label" for="form3Example1m"></label>
                           </div>
                         </div>
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
-                            <input type="text" id="form3Example1n" class="form-control form-control-lg" placeholder="Lastname" name="lastname" onChange={(e) => handleChange(e)}/>
+                            <input type="text" id="form3Example1n" class="form-control form-control-lg" placeholder="Lastname" name="lastname" required onChange={(e) => handleChange(e)}/>
                             <label class="form-label" for="form3Example1n"></label>
                           </div>
                         </div>
@@ -128,20 +132,20 @@ function Register() {
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
-                            <input type="password" id="form3Example1m1" class="form-control form-control-lg" placeholder="Password" name="password" onChange={(e) => handleChange(e)}/>
+                            <input type="password" id="form3Example1m1" class="form-control form-control-lg" placeholder="Password" name="password" required onChange={(e) => handleChange(e)}/>
                             <label class="form-label" for="form3Example1m1"></label>
                           </div>
                         </div>
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
-                            <input type="password" id="form3Example1n1" class="form-control form-control-lg" placeholder="Confirmpassword" name="confirmpassword" onChange={(e) => handleChange(e)}/>
+                            <input type="password" id="form3Example1n1" class="form-control form-control-lg" placeholder="Confirmpassword" name="confirmpassword" required onChange={(e) => handleChange(e)}/>
                             <label class="form-label" for="form3Example1n1"></label>
                           </div>
                         </div>
                       </div>
       
                       <div class="form-outline mb-4">
-                        <input type="email" id="form3Example8" class="form-control form-control-lg" placeholder="Email" name="emailID" onChange={(e) => handleChange(e)}/>
+                        <input type="email" id="form3Example8" class="form-control form-control-lg" placeholder="Email" name="emailID" required onChange={(e) => handleChange(e)}/>
                         <label class="form-label" for="form3Example8"></label>
                       </div>
       
@@ -150,19 +154,19 @@ function Register() {
                         <h6 class="mb-0 me-4">Gender: </h6>
       
                         <div class="form-check form-check-inline mb-0 me-4">
-                          <input class="form-check-input" type="radio" placeholder="Female" name="gender" id="femaleGender" onChange={(e) => handleChange(e)} 
+                          <input class="form-check-input" type="radio" placeholder="Female" name="gender" id="femaleGender" required onChange={(e) => handleChange(e)} 
                             value="Female" />
                           <label class="form-check-label" for="femaleGender">Female</label>
                         </div>
       
                         <div class="form-check form-check-inline mb-0 me-4">
-                          <input class="form-check-input" type="radio" placeholder="Male" name="gender" id="maleGender" onChange={(e) => handleChange(e)}
+                          <input class="form-check-input" type="radio" placeholder="Male" name="gender" id="maleGender" required onChange={(e) => handleChange(e)}
                             value="Male" />
                           <label class="form-check-label" for="maleGender">Male</label>
                         </div>
       
                         <div class="form-check form-check-inline mb-0">
-                          <input class="form-check-input" type="radio" placeholder="Other" name="gender" id="otherGender" onChange={(e) => handleChange(e)}
+                          <input class="form-check-input" type="radio" placeholder="Other" name="gender" id="otherGender" required onChange={(e) => handleChange(e)}
                             value="other" />
                           <label class="form-check-label" for="otherGender">Other</label>
                         </div>
@@ -172,7 +176,7 @@ function Register() {
                       <div class="row">
                         <div class="col-md-6 mb-4">
       
-                          <select class="select" placeholder="Option" name="year" onChange={handleChange}>
+                          <select class="select" placeholder="Option" name="year" required onChange={handleChange}>
                             <option>Year</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -183,7 +187,7 @@ function Register() {
                         </div>
                         <div class="col-md-6 mb-4">
       
-                          <select class="select" placeholder="Hostel" name="hostel" onChange={handleChange}>
+                          <select class="select" placeholder="Hostel" name="hostel" required onChange={handleChange}>
                             <option>Hostel</option>
                             <option value="SVBH">SVBH</option>
                             <option value="Tandon">Tandon</option>
@@ -201,27 +205,27 @@ function Register() {
                       </div>
       
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example9" class="form-control form-control-lg" placeholder="Phonenumber" name="phonenumber" onChange={(e) => handleChange(e)}/>
+                        <input type="text" id="form3Example9" class="form-control form-control-lg" placeholder="Phonenumber" name="phonenumber" required onChange={(e) => handleChange(e)}/>
                         <label class="form-label" for="form3Example9"></label>
                       </div>
       
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example90" class="form-control form-control-lg" placeholder="Registrationnumber" name="registrationnumber" onChange={(e) => handleChange(e)}/>
+                        <input type="text" id="form3Example90" class="form-control form-control-lg" placeholder="Registrationnumber" name="registrationnumber" required onChange={(e) => handleChange(e)}/>
                         <label class="form-label" for="form3Example90"></label>
                       </div>
       
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example99" class="form-control form-control-lg" placeholder="Course" name="course" onChange={(e) => handleChange(e)}/>
+                        <input type="text" id="form3Example99" class="form-control form-control-lg" placeholder="Course" name="course" required onChange={(e) => handleChange(e)}/>
                         <label class="form-label" for="form3Example99"></label>
                       </div>
       
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example97" class="form-control form-control-lg" placeholder="Problemsynopsis" name="problemsynopsis" onChange={(e) => handleChange(e)}/>
+                        <input type="text" id="form3Example97" class="form-control form-control-lg" placeholder="Problemsynopsis" name="problemsynopsis" required onChange={(e) => handleChange(e)}/>
                         <label class="form-label" for="form3Example97"></label>
                       </div>
       
                       <div class="d-flex justify-content-end pt-3">
-                        <button type="button" class="btn btn-light btn-lg">Reset all</button>
+                        <button type="button" class="btn btn-light btn-lg" onClick={handleReset}>Reset all</button>
                         <button type="submit" class="btn btn-warning btn-lg ms-2">Submit form</button>
                       </div>
       
