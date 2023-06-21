@@ -25,21 +25,21 @@ mongoose.connect(process.env.LOCAL_DB_URL, {
 .catch((err) => {
     console.log(err.message);
 })
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const userRoutes = require("./routes/userRoutes");
+// const express = require("express");
+// const cors = require("cors");
+// const mongoose = require("mongoose");
+// const userRoutes = require("./routes/userRoutes");
 
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 
-require("dotenv").config(); 
+// require("dotenv").config(); 
 
-app.use(cors());
-app.use(express.json());
+// app.use(cors());
+// app.use(express.json());
 
-app.use("/api/auth",userRoutes);
+// app.use("/api/auth",userRoutes);
 
-app.get('/products/:id', function (req, res, next) {
+app.get('/users/:id', function (req, res, next) {
     res.json({msg: 'This is CORS-enabled for all origins!'});
   });
 

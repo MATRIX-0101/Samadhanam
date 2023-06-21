@@ -8,15 +8,13 @@ function Contacts({ contacts, currentUser}) {
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
 
-    // useEffect(() => {
-    //     const setImageAndName = async() => {
-
-    //     };
-    // }, [currentUser]);
     useEffect(() => {
         if(currentUser){
+            const str = currentUser.firstName+currentUser.lastName+currentUser.registrationnumber;
             setCurrentUserImage(currentUser.avatarImage);
-            setCurrentUserName(currentUser.firstName+"_"+currentUser.lastName+"_"+currentUser.registrationnumber);
+            // setCurrentUserName(currentUser.registrationnumber);
+            setCurrentUserName(str);
+            // setCurrentUserName(currentUser.firstName+"_"+currentUser.lastName+"_"+currentUser.registrationnumber);
         }
     }, [currentUser]);
 
@@ -30,7 +28,7 @@ function Contacts({ contacts, currentUser}) {
                 <Container>
                     <div className="brand">
                         <img src={Logo} alt="logo" />
-                        <h7>welcome</h7>
+                        <h5>welcome</h5>
                     </div>
                     <div className="contacts">
                          {
@@ -47,7 +45,8 @@ function Contacts({ contacts, currentUser}) {
                                              />
                                         </div>
                                         <div className="username">
-                                            <h3>{contact.firstName+"_"+contact.lastName+"_"+contact.registrationnumber}</h3>
+                                            <h3>{contact.firstName+contact.lastName+contact.registrationnumber}</h3>
+                                            {/* <h3>{contact.firstName+"_"+contact.lastName+"_"+contact.registrationnumber}</h3> */}
                                         </div>
                                     </div>
                                 );

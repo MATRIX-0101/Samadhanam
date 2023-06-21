@@ -17,6 +17,7 @@ function Chat() {
             navigate("/login");
         }
         else {
+          // setCurrentUser("nitin");
           setCurrentUser(await JSON.parse(localStorage.getItem("web-chat-user")));
         }
     };
@@ -24,19 +25,26 @@ function Chat() {
     
 }, []);
 
-// useEffect(() => {
-//   const setAvatarAgain = async() =>{
-//       if(currentUser) {
-//           const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-//           setContacts(data.data);
-//       }
-//       else {
-//         navigate("/setAvatar");
-//       }
-//   };
-//   setAvatarAgain();
+
+
+useEffect(() => {
+  const setAvatarAgain = async() =>{
+    // console.log(await JSON.parse(localStorage.getItem("web-chat-user")));
+
+      if(currentUser) {
+          const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
+          setContacts(data.data);
+          navigate("/chat");
+      }
+      else {
+        console.log("currentUser is : ", currentUser)
+        console.log("setAvatarImage Called")
+        // navigate("/setAvatar");
+      }
+  };
+  setAvatarAgain();
   
-// }, []);
+}, [currentUser]);
 
   return (
     <Container>
