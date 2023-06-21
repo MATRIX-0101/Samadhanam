@@ -33,8 +33,12 @@ function Login() {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
+        toast.error(data.msg, toastOptions);
+        console.log(`Login status true`)
         localStorage.setItem("web-chat-user",JSON.stringify(data.user));
-        navigate("/setAvatar");
+        console.log(`before login to chat navigate`)
+        navigate("/chat");
+        console.log(`after login to chat navigate`)
       } 
        
     }
@@ -110,7 +114,6 @@ function Login() {
         <div className="form-outline mb-4">
           <input type="email" id="loginName" className="form-control" name="emailID" placeholder="E-mail" onChange={(e) => handleChange(e)}/>
           <label className="form-label" for="loginName">
-            Email
           </label>
         </div>
 
@@ -118,7 +121,6 @@ function Login() {
         <div className="form-outline mb-4">
           <input type="password" id="loginPassword" className="form-control" name="password" placeholder="Password" onChange={(e) => handleChange(e)}/>
           <label className="form-label" for="loginPassword">
-            Password
           </label>
         </div>
 
