@@ -14,11 +14,12 @@ function Chat() {
   const [isLoaded,setIsLoaded] = useState(false);
   useEffect(() => {
     const setDefaultlogin = async() =>{
+        
         if(!localStorage.getItem("web-chat-user")) {
             navigate("/login");
         }
         else {
-          // setCurrentUser("nitin");
+          
           setCurrentUser(await JSON.parse(localStorage.getItem("web-chat-user")));
           setIsLoaded(true);
         }

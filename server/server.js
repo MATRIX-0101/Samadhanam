@@ -7,10 +7,10 @@ const dotenv = require("dotenv");
 const app = express();
 require("dotenv").config(); 
 
-// app.use(cors());
-// app.use(express.json());
+ app.use(cors());
+ app.use(express.json());
 
-// app.use("/api/auth",userRoutes);
+ app.use("/api/auth",userRoutes);
 
 app.get('/users/:id', function (req, res, next) {
     res.json({msg: 'This is CORS-enabled for all origins!'});
