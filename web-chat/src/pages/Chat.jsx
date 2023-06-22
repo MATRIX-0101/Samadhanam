@@ -4,13 +4,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { allUsersRoute } from "../utils/APIRoutes"
 import Contacts from "../components/Contacts"
-
-
+import Welcome from '../components/welcome';
+import ChatContainer from '../components/ChatContainer';
 function Chat() {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
-
+  const [currentChat,setCurrentChat] = useState(undefined);
+  const [isLoaded,setIsLoaded] = useState(false);
   useEffect(() => {
     const setDefaultlogin = async() =>{
         if(!localStorage.getItem("web-chat-user")) {
@@ -18,30 +19,47 @@ function Chat() {
         }
         else {
           setCurrentUser(await JSON.parse(localStorage.getItem("web-chat-user")));
+          setIsLoaded(true);
         }
     };
     setDefaultlogin();
     
 }, []);
 
-// useEffect(() => {
-//   const setAvatarAgain = async() =>{
-//       if(currentUser) {
-//           const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-//           setContacts(data.data);
-//       }
-//       else {
-//         navigate("/setAvatar");
-//       }
-//   };
-//   setAvatarAgain();
+ useEffect(() => {
+   const setAvatarAgain = async() =>{
+      if(currentUser){
+      if(currentUser.isAvatarImageSet) {
+           const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
+           setContacts(data.data);
+       }
+       else {
+         navigate("/setAvatar");
+       }
+      }
+   };
+   setAvatarAgain();
   
-// }, []);
+ }, [currentUser]);
+
+ const handleChatChange = (chat) => {
+  setCurrentChat(chat);
+
+ }
 
   return (
     <Container>
       <div className="container">
-        <Contacts contacts={contacts} currentUser={currentUser} />
+        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+        {
+          isLoaded && currentChat === undefined ?(
+          <Welcome CurrentUser={currentUser} />) :
+          (
+            <ChatContainer currentChat={currentChat}/>
+          )
+
+        }
+      
       </div>
     </Container>
   )

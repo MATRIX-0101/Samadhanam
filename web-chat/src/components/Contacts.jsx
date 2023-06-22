@@ -2,8 +2,7 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import Logo from "../assets/smile.png"
 
-
-function Contacts({ contacts, currentUser}) {
+function Contacts({ contacts, currentUser, changeChat}) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
@@ -16,12 +15,15 @@ function Contacts({ contacts, currentUser}) {
     useEffect(() => {
         if(currentUser){
             setCurrentUserImage(currentUser.avatarImage);
-            setCurrentUserName(currentUser.firstName+"_"+currentUser.lastName+"_"+currentUser.registrationnumber);
+            setCurrentUserName(currentUser.firstname+"_"+currentUser.lastname+"_"+currentUser.registrationnumber);
         }
     }, [currentUser]);
 
-    const changeCurrentChat = (index, contact) => {
 
+    const changeCurrentChat = (index, contact) => {
+        setCurrentSelected(index);
+        changeChat(contact);
+        
     };
 
     return <>
@@ -30,7 +32,7 @@ function Contacts({ contacts, currentUser}) {
                 <Container>
                     <div className="brand">
                         <img src={Logo} alt="logo" />
-                        <h7>welcome</h7>
+                        <h7>samadhanam</h7>
                     </div>
                     <div className="contacts">
                          {
@@ -39,6 +41,7 @@ function Contacts({ contacts, currentUser}) {
                                     <div className={`contact ${index === currentSelected ?"selected" : ""
                                     }`} 
                                     key={index}
+                                    onClick={()=>changeCurrentChat(index,contact)}
                                     >
                                         <div className="avatar">
                                             <img 
@@ -47,7 +50,7 @@ function Contacts({ contacts, currentUser}) {
                                              />
                                         </div>
                                         <div className="username">
-                                            <h3>{contact.firstName+"_"+contact.lastName+"_"+contact.registrationnumber}</h3>
+                                            <h7>{contact.firstname+"_"+contact.lastname+"_"+contact.registrationnumber}</h7>
                                         </div>
                                     </div>
                                 );
@@ -63,7 +66,7 @@ function Contacts({ contacts, currentUser}) {
                              />
                         </div>
                         <div className="username">
-                            <h2>{currentUserName}</h2>
+                            <h7>{currentUserName}</h7>
                         </div>
                     </div> 
 
@@ -119,12 +122,14 @@ const Container = styled.div`
             transition: 0.5s ease-in-out;
             .avatar {
                 img {
-                    height: 3rem;
+                    height: 2rem;
                 }
             }
             .username {
-                h3 {
+
+                h7 {
                     color: white;
+                    font-size: 1rem;
                 }
             }
         }
@@ -136,7 +141,8 @@ const Container = styled.div`
     .current-user {
         background-color: #0d0d30;
         display: flex;
-        justify-content: center;
+        justify-content: left;
+        align-items: center;
         gap: 2rem;
         .avatar {
             img {
@@ -145,7 +151,8 @@ const Container = styled.div`
             }
         }
         .username {
-            h2 {
+            font-size: 1rem;
+            h7 {
                 color: white;
             }
         }
