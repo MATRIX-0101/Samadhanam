@@ -18,6 +18,7 @@ function Chat() {
             navigate("/login");
         }
         else {
+          // setCurrentUser("nitin");
           setCurrentUser(await JSON.parse(localStorage.getItem("web-chat-user")));
           setIsLoaded(true);
         }

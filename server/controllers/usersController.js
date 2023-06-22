@@ -51,17 +51,20 @@ module.exports.login = async (req,res,next) => {
     try{
         console.log(req.body);
         const { emailID,password } = req.body;
-        const emailcheck = await User.findOne({ emailID });
-        if(!emailcheck)
+        console.log(`email id is : ${emailID} and password is ${password}`);
+        const user = await User.findOne({ emailID });
+
+        if(!user)
             return res.json({msg: "Incorrect username and password", status: false});
         const isPasswordValid = await  brcypt.compare(password,user.password);
+
         if(!isPasswordValid)
             return res.json({msg: "Incorrect username and password", status: false});
         
         
         
         delete user.password;
-        return res.json({ user,status: true }); 
+        return res.json({ user ,status: true }); 
     } catch (ex) {
         next(ex);
     }

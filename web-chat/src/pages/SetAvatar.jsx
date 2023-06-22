@@ -31,6 +31,7 @@ function SetAvatar() {
                 navigate("/register");
             }
         };
+        setDefaultMenu();
         
     }, []);
 
@@ -82,16 +83,22 @@ function SetAvatar() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = [];
-            for(let i=0; i<4 ; i++){
-                const image = await axios.get(
-                    `${api}/${Math.round(Math.random() * 1000)}`
-                );
-                const buffer = Buffer.from(image.data);
-                data.push(buffer.toString("base64"));
+            try{
+                const data = [];
+                for(let i=0; i<4 ; i++){
+                    const image = await axios.get(
+                        `${api}/${Math.round(Math.random() * 1000)}`
+                    );
+                    const buffer = Buffer.from(image.data);
+                    data.push(buffer.toString("base64"));
+                }
+                setAvatars(data);
+                setIsLoading(false);
+            } catch (err){
+                toast.error("Error : please refresh page , please try again", toastOptions);
+                console.log(err);
             }
-            setAvatars(data);
-            setIsLoading(false);
+            
         };
 
         fetchData();

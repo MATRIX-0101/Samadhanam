@@ -7,13 +7,9 @@ function Contacts({ contacts, currentUser, changeChat}) {
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
 
-    // useEffect(() => {
-    //     const setImageAndName = async() => {
-
-    //     };
-    // }, [currentUser]);
     useEffect(() => {
         if(currentUser){
+            const str = currentUser.firstName+currentUser.lastName+currentUser.registrationnumber;
             setCurrentUserImage(currentUser.avatarImage);
             setCurrentUserName(currentUser.firstname+"_"+currentUser.lastname+"_"+currentUser.registrationnumber);
         }
