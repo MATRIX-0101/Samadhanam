@@ -113,14 +113,14 @@ function Login() {
 
         <div className="form-outline mb-4">
           <input type="email" id="loginName" className="form-control" name="emailID" placeholder="E-mail" onChange={(e) => handleChange(e)}/>
-          <label className="form-label" for="loginName">
+          <label className="form-label" htmlFor="loginName">
           </label>
         </div>
 
         {/* <!-- Password input --> */}
         <div className="form-outline mb-4">
           <input type="password" id="loginPassword" className="form-control" name="password" placeholder="Password" onChange={(e) => handleChange(e)}/>
-          <label className="form-label" for="loginPassword">
+          <label className="form-label" htmlFor="loginPassword">
           </label>
         </div>
 

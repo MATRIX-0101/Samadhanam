@@ -9,8 +9,9 @@ function Contacts({ contacts, currentUser, changeChat}) {
 
     useEffect(() => {
         if(currentUser){
-            const str = currentUser.firstName+currentUser.lastName+currentUser.registrationnumber;
+            // const str = currentUser.firstName+currentUser.lastName+currentUser.registrationnumber;
             setCurrentUserImage(currentUser.avatarImage);
+            // setCurrentUserName(currentUser.firstname);
             setCurrentUserName(currentUser.firstname+"_"+currentUser.lastname+"_"+currentUser.registrationnumber);
         }
     }, [currentUser]);
@@ -46,7 +47,8 @@ function Contacts({ contacts, currentUser, changeChat}) {
                                              />
                                         </div>
                                         <div className="username">
-                                            <h7>{contact.firstname+"_"+contact.lastname+"_"+contact.registrationnumber}</h7>
+                                            {/* <h6>{contact.firstname}</h6> */}
+                                            <h6>{contact.firstname+"_"+contact.lastname+"_"+contact.registrationnumber}</h6>
                                         </div>
                                     </div>
                                 );

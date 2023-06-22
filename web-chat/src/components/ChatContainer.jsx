@@ -1,16 +1,35 @@
-import React from 'react';
+import React , { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Logout from './Logout';
 import ChatInput from './ChatInput';
 import Messages from './Messages';
-import { sendMessageRoute } from '../utils/APIRoutes';
+import { getAllMessageRoute, sendMessageRoute } from '../utils/APIRoutes';
 import axios from 'axios';
 
 export default function ChatContainer({currentChat,currentUser}) {
+
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        const getResponse = async() =>{
+           const response = await axios.post(getAllMessageRoute, {
+            from: currentUser._id,
+            to: currentChat._id,
+           });
+           setMessages(response.data);
+        };
+        getResponse();
+        
+       
+      }, [currentChat]);
+
+
+
     const handleSendMsg = async (msg) => {
+        alert(msg);
         await axios.post(sendMessageRoute, {
-            from: currentUser.firstname,
-            to: currentChat.firstname,
+            from: currentUser._id,
+            to: currentChat._id,
             message:msg,
         });
     };
@@ -33,7 +52,25 @@ export default function ChatContainer({currentChat,currentUser}) {
             </div>
             <Logout/>
         </div>
-        <Messages />
+        {/* <Messages /> */}
+        <div className="chat-messages">
+            {
+                messages.map((message) => {
+                    return (
+                        <div>
+                            <div className={`message ${message.fromSelf ? "sended":"received"}`}>
+                                <div className="content">
+                                    <p>
+                                        {message.message}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+        </div>
+
+
         <ChatInput handleSendMsg={handleSendMsg} />
   </Container>
     )}
