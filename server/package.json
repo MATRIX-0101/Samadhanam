@@ -18,7 +18,13 @@
     "grep": "^0.1.0",
     "mongoose": "^7.2.2",
     "nodemon": "^2.0.22",
-    "socket.io": "^4.6.2",
-    "sudo": "^1.0.3"
+    "react-uuid": "^2.0.0",
+    "socket.io": "^4.7.0",
+    "sudo": "^1.0.3",
+    "uuid": "^9.0.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.7",
+    "utf-8-validate": "^5.0.10"
   }
 }

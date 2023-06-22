@@ -29,11 +29,11 @@ module.exports.getAllMessage = async (req,res,next) => {
       return {
         fromSelf: msg.sender.toString() === from,
         message: msg.message.text,
-      }
+      };
     });
     res.json(projectMessages);
 
-  } catch (err){
-    next(err);
+  } catch (ex){
+    next(ex);
   }
 };

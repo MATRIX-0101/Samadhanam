@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { allUsersRoute } from "../utils/APIRoutes"
+import { allUsersRoute,host } from "../utils/APIRoutes"
 import Contacts from "../components/Contacts"
-import Welcome from '../components/Welcome';
+import Welcome from '../components/welcome';
 import ChatContainer from '../components/ChatContainer';
+import { io } from 'socket.io-client';
 function Chat() {
+  const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -27,6 +29,14 @@ function Chat() {
     setDefaultlogin();
     
 }, []);
+
+useEffect(()=>{
+  if(currentUser) {
+    socket.current = io(host);
+    socket.current.emit("add-User",currentUser._id);
+  }
+
+},[currentUser])
 
  useEffect(() => {
    const setAvatarAgain = async() =>{
@@ -58,7 +68,7 @@ function Chat() {
           isLoaded && currentChat === undefined ?(
           <Welcome CurrentUser={currentUser} />) :
           (
-            <ChatContainer currentChat={currentChat} currentUser={currentUser} />
+            <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />
           )
 
         }
@@ -80,7 +90,6 @@ const Container = styled.div`
     width: 85vw; 
     background-color: #00000076;
     display: grid;
-    ${'' /* grid-template-columns: 95% 5%; */}
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1000px){
       grid-template-columns: 35% 65%;
