@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Robot from "../assets/smiley.gif";
 
-export default function welcome( {currentUser} ) {
+export default function Welcome( {currentUser} ) {
   return <Container>
     <img src={Robot} alt="Robot" />
     <h1>

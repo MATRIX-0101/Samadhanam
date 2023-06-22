@@ -101,84 +101,84 @@ function Register() {
       <>
       
       <form  id="reg-form" onSubmit={(event) => handleSubmit(event)}>
-      <section class="h-100 bg-dark">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col">
-              <div class="card card-registration my-4">
-                <div class="row g-0">
-                  <div class="col-xl-6 d-none d-xl-block">
+      <section className="h-100 bg-dark">
+        <div className="container py-5 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col">
+              <div className="card card-registration my-4">
+                <div className="row g-0">
+                  <div className="col-xl-6 d-none d-xl-block">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
-                      alt="Sample photo" class="img-fluid"
+                      alt="Sample photo" className="img-fluid"
                       styles="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
                   </div>
-                  <div class="col-xl-6">
-                    <div class="card-body p-md-5 text-black">
-                      <h3 class="mb-5 text-uppercase">Student registration form</h3>
+                  <div className="col-xl-6">
+                    <div className="card-body p-md-5 text-black">
+                      <h3 className="mb-5 text-uppercase">Student registration form</h3>
       
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
-                            <input type="text" id="form3Example1m" class="form-control form-control-lg" placeholder="Firstname" name="firstname" required onChange={(e) => handleChange(e)}/>
-                            <label class="form-label" for="form3Example1m"></label>
+                      <div className="row">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
+                            <input type="text" id="form3Example1m" className="form-control form-control-lg" placeholder="Firstname" name="firstname" required onChange={(e) => handleChange(e)}/>
+                            <label className="form-label" htmlFor="form3Example1m"></label>
                           </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
-                            <input type="text" id="form3Example1n" class="form-control form-control-lg" placeholder="Lastname" name="lastname" required onChange={(e) => handleChange(e)}/>
-                            <label class="form-label" for="form3Example1n"></label>
-                          </div>
-                        </div>
-                      </div>
-      
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
-                            <input type="password" id="form3Example1m1" class="form-control form-control-lg" placeholder="Password" name="password" required onChange={(e) => handleChange(e)}/>
-                            <label class="form-label" for="form3Example1m1"></label>
-                          </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
-                            <input type="password" id="form3Example1n1" class="form-control form-control-lg" placeholder="Confirmpassword" name="confirmpassword" required onChange={(e) => handleChange(e)}/>
-                            <label class="form-label" for="form3Example1n1"></label>
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
+                            <input type="text" id="form3Example1n" className="form-control form-control-lg" placeholder="Lastname" name="lastname" required onChange={(e) => handleChange(e)}/>
+                            <label className="form-label" htmlFor="form3Example1n"></label>
                           </div>
                         </div>
                       </div>
       
-                      <div class="form-outline mb-4">
-                        <input type="email" id="form3Example8" class="form-control form-control-lg" placeholder="Email" name="emailID" required onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example8"></label>
+                      <div className="row">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
+                            <input type="password" id="form3Example1m1" className="form-control form-control-lg" placeholder="Password" name="password" required onChange={(e) => handleChange(e)}/>
+                            <label className="form-label" htmlFor="form3Example1m1"></label>
+                          </div>
+                        </div>
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
+                            <input type="password" id="form3Example1n1" className="form-control form-control-lg" placeholder="Confirmpassword" name="confirmpassword" required onChange={(e) => handleChange(e)}/>
+                            <label className="form-label" htmlFor="form3Example1n1"></label>
+                          </div>
+                        </div>
                       </div>
       
-                      <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                      <div className="form-outline mb-4">
+                        <input type="email" id="form3Example8" className="form-control form-control-lg" placeholder="Email" name="emailID" required onChange={(e) => handleChange(e)}/>
+                        <label className="form-label" htmlFor="form3Example8"></label>
+                      </div>
       
-                        <h6 class="mb-0 me-4">Gender: </h6>
+                      <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
       
-                        <div class="form-check form-check-inline mb-0 me-4">
-                          <input class="form-check-input" type="radio" placeholder="Female" name="gender" id="femaleGender" required onChange={(e) => handleChange(e)} 
+                        <h6 className="mb-0 me-4">Gender: </h6>
+      
+                        <div className="form-check form-check-inline mb-0 me-4">
+                          <input className="form-check-input" type="radio" placeholder="Female" name="gender" id="femaleGender" required onChange={(e) => handleChange(e)} 
                             value="Female" />
-                          <label class="form-check-label" for="femaleGender">Female</label>
+                          <label className="form-check-label" htmlFor="femaleGender">Female</label>
                         </div>
       
-                        <div class="form-check form-check-inline mb-0 me-4">
-                          <input class="form-check-input" type="radio" placeholder="Male" name="gender" id="maleGender" required onChange={(e) => handleChange(e)}
+                        <div className="form-check form-check-inline mb-0 me-4">
+                          <input className="form-check-input" type="radio" placeholder="Male" name="gender" id="maleGender" required onChange={(e) => handleChange(e)}
                             value="Male" />
-                          <label class="form-check-label" for="maleGender">Male</label>
+                          <label className="form-check-label" htmlFor="maleGender">Male</label>
                         </div>
       
-                        <div class="form-check form-check-inline mb-0">
-                          <input class="form-check-input" type="radio" placeholder="Other" name="gender" id="otherGender" required onChange={(e) => handleChange(e)}
+                        <div className="form-check form-check-inline mb-0">
+                          <input className="form-check-input" type="radio" placeholder="Other" name="gender" id="otherGender" required onChange={(e) => handleChange(e)}
                             value="other" />
-                          <label class="form-check-label" for="otherGender">Other</label>
+                          <label className="form-check-label" htmlFor="otherGender">Other</label>
                         </div>
       
                       </div>
       
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
+                      <div className="row">
+                        <div className="col-md-6 mb-4">
       
-                          <select class="select" placeholder="Option" name="year" required onChange={handleChange}>
+                          <select className="select" placeholder="Option" name="year" required onChange={handleChange}>
                             <option>Year</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -187,9 +187,9 @@ function Register() {
                           </select>
       
                         </div>
-                        <div class="col-md-6 mb-4">
+                        <div className="col-md-6 mb-4">
       
-                          <select class="select" placeholder="Hostel" name="hostel" required onChange={handleChange}>
+                          <select className="select" placeholder="Hostel" name="hostel" required onChange={handleChange}>
                             <option>Hostel</option>
                             <option value="SVBH">SVBH</option>
                             <option value="Tandon">Tandon</option>
@@ -206,29 +206,29 @@ function Register() {
                         </div>
                       </div>
       
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form3Example9" class="form-control form-control-lg" placeholder="Phonenumber" name="phonenumber" required onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example9"></label>
+                      <div className="form-outline mb-4">
+                        <input type="text" id="form3Example9" className="form-control form-control-lg" placeholder="Phonenumber" name="phonenumber" required onChange={(e) => handleChange(e)}/>
+                        <label className="form-label" htmlFor="form3Example9"></label>
                       </div>
       
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form3Example90" class="form-control form-control-lg" placeholder="Registrationnumber" name="registrationnumber" required onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example90"></label>
+                      <div className="form-outline mb-4">
+                        <input type="text" id="form3Example90" className="form-control form-control-lg" placeholder="Registrationnumber" name="registrationnumber" required onChange={(e) => handleChange(e)}/>
+                        <label className="form-label" htmlFor="form3Example90"></label>
                       </div>
       
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form3Example99" class="form-control form-control-lg" placeholder="Course" name="course" required onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example99"></label>
+                      <div className="form-outline mb-4">
+                        <input type="text" id="form3Example99" className="form-control form-control-lg" placeholder="Course" name="course" required onChange={(e) => handleChange(e)}/>
+                        <label className="form-label" htmlFor="form3Example99"></label>
                       </div>
       
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form3Example97" class="form-control form-control-lg" placeholder="Problemsynopsis" name="problemsynopsis" required onChange={(e) => handleChange(e)}/>
-                        <label class="form-label" for="form3Example97"></label>
+                      <div className="form-outline mb-4">
+                        <input type="text" id="form3Example97" className="form-control form-control-lg" placeholder="Problemsynopsis" name="problemsynopsis" required onChange={(e) => handleChange(e)}/>
+                        <label className="form-label" htmlFor="form3Example97"></label>
                       </div>
       
-                      <div class="d-flex justify-content-end pt-3">
-                        <button type="button" class="btn btn-light btn-lg" onClick={handleReset}>Reset all</button>
-                        <button type="submit" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                      <div className="d-flex justify-content-end pt-3">
+                        <button type="button" className="btn btn-light btn-lg" onClick={handleReset}>Reset all</button>
+                        <button type="submit" className="btn btn-warning btn-lg ms-2">Submit form</button>
                       </div>
       
                     </div>
