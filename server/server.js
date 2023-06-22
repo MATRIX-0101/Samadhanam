@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
+const messageRoute = require("./routes/messagesRoute");
 
 const dotenv = require("dotenv");
 const app = express();
@@ -11,6 +12,7 @@ require("dotenv").config();
  app.use(express.json());
 
  app.use("/api/auth",userRoutes);
+ app.use("/api/messages",messageRoute);
 
 app.get('/users/:id', function (req, res, next) {
     res.json({msg: 'This is CORS-enabled for all origins!'});
