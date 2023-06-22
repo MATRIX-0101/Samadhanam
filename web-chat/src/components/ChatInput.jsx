@@ -5,6 +5,7 @@ import { IoMdSend } from 'react-icons/io';
 import { BsEmojiSmileFill } from 'react-icons/bs';
 
 
+
 export default function ChatInput({handleSendMsg}) {
     const [showEmojiPicker,setShowEmojiPicker] = useState(false);
     const[msg,setMsg] = useState("");
@@ -18,9 +19,10 @@ export default function ChatInput({handleSendMsg}) {
         top: "-350px",
     };
 
-    const handleEmojiClick = (event,emoji) => {
+    const handleEmojiClick = (emojiObj, event) => {
         let message=msg;
-        message += emoji.emoji;
+        message += emojiObj.emoji;
+        console.log("message is :", message);
         setMsg(message);
     };
 
@@ -60,7 +62,7 @@ export default function ChatInput({handleSendMsg}) {
 
 const Container = styled.div`
   display: grid;
-  height: 20%;
+  ${'' /* height: 20%; */}
   grid-template-columns: 5% 95%;
   align-items:center;
   background-color: #080420;
@@ -75,7 +77,7 @@ const Container = styled.div`
         position: relative;
         svg {
             font-size: 1.5rem;
-            color: #ffff00c7;
+            color: #ffff00c8;
             cursor: pointer;
             
         }
