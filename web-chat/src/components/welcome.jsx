@@ -3,16 +3,19 @@ import styled from "styled-components";
 import Robot from "../assets/smiley.gif";
 
 export default function welcome( {currentUser} ) {
-  return <Container>
+  return( 
+  
+  <Container>
     <img src={Robot} alt="Robot" />
     <h1>
-        Welcome, <span>{currentUser}!</span> 
+        Welcome, <span>{currentUser}bro!</span> 
 
     </h1>
     <h3>
         Please select someone from list to start conversation
     </h3>
-  </Container>;
+  </Container>
+  );
 
 }
 

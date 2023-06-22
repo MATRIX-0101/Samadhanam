@@ -12,6 +12,11 @@ export default function ChatInput({handleSendMsg}) {
     const handleEmojiPickerHideShow = () => {
         setShowEmojiPicker(!showEmojiPicker);
     };
+    
+    const emojipickerreact = {
+        position: "absolute",
+        top: "-350px",
+    };
 
     const handleEmojiClick = (event,emoji) => {
         let message=msg;
@@ -35,7 +40,7 @@ export default function ChatInput({handleSendMsg}) {
             <div className="emoji">
                 
                 <BsEmojiSmileFill onClick={handleEmojiPickerHideShow} />
-                {showEmojiPicker&&<Picker onEmojiClick={handleEmojiClick} />}
+                {showEmojiPicker&&<Picker sx={{background:"black"}}  onEmojiClick={handleEmojiClick} />}
                 
                 
                 
@@ -50,6 +55,8 @@ export default function ChatInput({handleSendMsg}) {
     </Container>
   )
 }
+
+
 
 const Container = styled.div`
   display: grid;
