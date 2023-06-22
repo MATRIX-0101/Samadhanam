@@ -33,13 +33,28 @@ const server = app.listen(process.env.PORT,()=> {
     console.log(`Server is connected on PORT : ${process.env.PORT}`);
 })
 
-const io = socket(server,{
-    cors:{
-        origin:"https://127.0.0.1:3000",
-        credentials: true,
-        methods: ["GET", "POST"],
+// const io = socket(server,{
+//     cors:{
+//         // origin:"https://127.0.0.1:3000",
+//         origin: "http://localhost:3000",
+//         credentials: true,
+//         methods: ["GET", "POST"],
+//     },
+// });
+const io = socket(server, {
+    cors: {
+      origin: function (origin, callback) {
+        const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+      credentials: true,
+      methods: ["GET", "POST"],
     },
-});
+  });
 
 global.onlineUsers = new Map();
 
@@ -49,7 +64,7 @@ io.on("connection",(socket)=>{
         onlineUsers.set(userID, socket.id);
     });
 
-    socket.on("sen-msg", (data)=>{
+    socket.on("send-msg", (data)=>{
         const sendUserSocket = onlineUsers.get(data.to);
         if(sendUserSocket) {
             socket.to(sendUserSocket).emit("msg-receive",data.message);

@@ -11,7 +11,7 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
     const [messages, setMessages] = useState([]);
     const [arrivalMessage,setArrivalMessage] = useState(null); 
     
-    const scrollRef=useRef();
+    const scrollRef = useRef();
 
     useEffect(() => {
         if(currentChat){
