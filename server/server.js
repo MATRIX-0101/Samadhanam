@@ -43,8 +43,11 @@ const server = app.listen(process.env.PORT,()=> {
 // });
 const io = socket(server, {
     cors: {
+      header  : {
+        "Access-Control-Allow-Origin": "*",
+      },
       origin: function (origin, callback) {
-        const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+        const allowedOrigins = ['http://localhost:3000'];
         if (!origin || allowedOrigins.includes(origin)) {
           callback(null, true);
         } else {
@@ -60,6 +63,7 @@ global.onlineUsers = new Map();
 
 io.on("connection",(socket)=>{
     global.chatSocket = socket;
+  
     socket.on("add-user", (userID)=>{
         onlineUsers.set(userID, socket.id);
     });
@@ -68,6 +72,7 @@ io.on("connection",(socket)=>{
         const sendUserSocket = onlineUsers.get(data.to);
         if(sendUserSocket) {
             socket.to(sendUserSocket).emit("msg-receive",data.message);
+            
         }
     });
 

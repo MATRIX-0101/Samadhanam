@@ -8,7 +8,7 @@ export default function welcome( {currentUser} ) {
   <Container>
     <img src={Robot} alt="Robot" />
     <h1>
-        Welcome, <span>{currentUser}bro!</span> 
+        Welcome, <span>bro!</span> 
 
     </h1>
     <h3>

@@ -14,16 +14,19 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
     const scrollRef = useRef();
 
     useEffect(() => {
-        if(currentChat){
+        
         const getResponse = async() =>{
+            if(currentChat){
            const response = await axios.post(getAllMessagesRoute, {
             from: currentUser._id,
             to: currentChat._id,
            });
            setMessages(response.data);
+        }
         };
         getResponse();
-    }
+    
+    
         
        
       }, [currentChat]);
@@ -31,7 +34,7 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
 
 
     const handleSendMsg = async (msg) => {
-        alert(msg);
+        
         await axios.post(sendMessageRoute, {
             from: currentUser._id,
             to: currentChat._id,
