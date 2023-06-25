@@ -33,45 +33,53 @@ const server = app.listen(process.env.PORT,()=> {
     console.log(`Server is connected on PORT : ${process.env.PORT}`);
 })
 
-// const io = socket(server,{
-//     cors:{
-//         // origin:"https://127.0.0.1:3000",
-//         origin: "http://localhost:3000",
-//         credentials: true,
-//         methods: ["GET", "POST"],
-//     },
-// });
-const io = socket(server, {
-    cors: {
-      header  : {
-        "Access-Control-Allow-Origin": "*",
-      },
-      origin: function (origin, callback) {
-        const allowedOrigins = ['http://localhost:3000'];
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-      credentials: true,
-      methods: ["GET", "POST"],
+const io = socket(server,{
+    cors:{
+        // origin:"https://127.0.0.1:3000",
+        origin: '*',
+        // origin: "http://localhost:5000",
+        credentials: true,
+        methods: ["GET", "POST"],
     },
-  });
+});
+// const io = require('socket.io')(server, { cors: { origin: '*' } });
+// const io = socket(server, {
+//     cors: {
+//       origin: function (origin, callback) {
+//         const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+//         if (!origin || allowedOrigins.includes(origin)) {
+//           callback(null, true);
+//         } else {
+//           callback(new Error('Not allowed by CORS'));
+//         }
+//       },
+//       credentials: true,
+//       methods: ["GET", "POST"],
+//     },
+//   });
 
 global.onlineUsers = new Map();
 
 io.on("connection",(socket)=>{
+  console.log("connected to socket.id :", socket.id);
     global.chatSocket = socket;
-  
-    socket.on("add-user", (userID)=>{
+
+    socket.on("add-user",(userID)=>{
         onlineUsers.set(userID, socket.id);
+        // console.log("userID/ currentUserid = ",userID);
     });
+    // socket.on("temp",(err)=>{
+    //   // onlineUsers.set( socket.id);
+    //   console.log("message is :",err);
+    // });
 
     socket.on("send-msg", (data)=>{
         console.log("message",{ data });
         const sendUserSocket = onlineUsers.get(data.to);
+        // console.log("sendUserSocket to chat id :", data.to);
+        // console.log("sendUserSocket is :", sendUserSocket);
         if(sendUserSocket) {
+            // console.log("dataa sent is : ", data.message);
             socket.to(sendUserSocket).emit("msg-receive",data.message);
             
         }

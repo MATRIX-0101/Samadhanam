@@ -8,7 +8,8 @@ import Welcome from '../components/welcome';
 import ChatContainer from '../components/ChatContainer';
 import { io } from 'socket.io-client';
 function Chat() {
-  const socket = useRef(io("http://localhost:5000"));
+// function Chat({socket}) {
+  const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -32,8 +33,15 @@ function Chat() {
 
 useEffect(()=>{
   if(currentUser) {
-    socket.current = io(host);
-    socket.current.emit("add-User",currentUser._id);
+    // socket.current = io("http://localhost:5000",{ transport: ['websocket'] });
+    // console.log(socket.current.connected);
+    socket.current = io("http://localhost:5000", { transport: ['websocket' ] });
+    // console.log(socket.current.connected);
+
+
+    socket.current.emit("add-user",currentUser._id);
+
+    console.log(currentUser._id)
   }
 
 },[currentUser])
