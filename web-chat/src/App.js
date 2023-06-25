@@ -1,12 +1,22 @@
-import React from 'react';
+import React , {useEffect}from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Chat from './pages/Chat';
 import Menu from './pages/Menu';
 import SetAvatar from './pages/SetAvatar';
+import { io } from 'socket.io-client';
+
+
+// const socket = io("http://localhost:5000", { transport: ['websocket' ] });
 
 export default function App() {
+
+// useEffect( () =>{
+//   socket.emit("temp", {message: "hello"});
+//   console.log(socket);
+// },[]);
+
   return (
   <BrowserRouter>
     <Routes>
@@ -15,6 +25,7 @@ export default function App() {
       <Route path="/register" element={<Register />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/chat" element={<Chat />}></Route>
+      {/* <Route path="/chat" element={<Chat socket={socket} />}></Route> */}
     </Routes>
   </BrowserRouter>
   );
