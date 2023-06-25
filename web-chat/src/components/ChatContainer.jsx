@@ -1,4 +1,4 @@
-import React , { useState, useEffect, useRef } from 'react';
+import React , { useState, useEffect, useRef, useReducer } from 'react';
 import styled from 'styled-components';
 import Logout from './Logout';
 import ChatInput from './ChatInput';
@@ -13,10 +13,16 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
     
     const scrollRef = useRef();
 
+
+    function timeout(ms) {
+        return new Promise((resolve) => setTimeout(resolve,ms));
+    }
+
     useEffect(() => {
         
         const getResponse = async() =>{
             if(currentChat){
+                
            const response = await axios.post(getAllMessagesRoute, {
             from: currentUser._id,
             to: currentChat._id,
@@ -150,6 +156,14 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     overflow: auto;
+    &::-webkit-scrollbar {
+        width: 0.2rem;
+        &-thumb {
+            background-color: #ffffff39;
+            width: 0.1rem;
+            border-radius: 1rem;
+        }
+    }
     .message {
        display: flex;
        align-items: center;

@@ -8,7 +8,7 @@ import Welcome from '../components/welcome';
 import ChatContainer from '../components/ChatContainer';
 import { io } from 'socket.io-client';
 function Chat() {
-  const socket = useRef();
+  const socket = useRef(io("http://localhost:5000"));
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
