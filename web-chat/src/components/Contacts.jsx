@@ -40,7 +40,7 @@ function Contacts({ contacts, currentUser, changeChat}) {
         
         setCurrentSelected(index);
         changeChat(contact);
-        alert(`${contact.problemsynopsis}`);
+        
         
     };
     if(Admin){

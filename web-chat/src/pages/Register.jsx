@@ -21,7 +21,6 @@ function Register() {
     phonenumber:"",
     registrationnumber:"",
     course:"",
-    problemsynopsis:"",
     admin:"",
   });
 
@@ -29,7 +28,7 @@ function Register() {
     event.preventDefault();
     if(handleValidation()){
       console.log("invalidation",registerRoute);
-      const { firstname,lastname,password,emailID,gender,year,hostel,phonenumber,registrationnumber,course,problemsynopsis,admin } = values;
+      const { firstname,lastname,password,emailID,gender,year,hostel,phonenumber,registrationnumber,course,admin } = values;
       const { data } = await axios.post(registerRoute,{
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
@@ -46,7 +45,6 @@ function Register() {
         phonenumber,
         registrationnumber,
         course,
-        problemsynopsis,
         admin,
       });
       if (data.status === false) {
@@ -74,7 +72,7 @@ function Register() {
 
   
   const handleValidation = () => {
-    const { firstname,lastname,password,confirmpassword,emailID,gender,year,hostel,phonenumber,registrationnumber,course,problemsynopsis,admin } = values;
+    const { firstname,lastname,password,confirmpassword,emailID,gender,year,hostel,phonenumber,registrationnumber,course,admin } = values;
     if( password!==confirmpassword){
       toast.error("password and confirm password should be same.",toastOptions);
       return false;
@@ -225,10 +223,10 @@ function Register() {
                         <label className="form-label" htmlFor="form3Example99"></label>
                       </div>
       
-                      <div className="form-outline mb-4">
+                     {/* <div className="form-outline mb-4">
                         <input type="text" id="form3Example97" className="form-control form-control-lg" placeholder="Problemsynopsis" name="problemsynopsis"  onChange={(e) => handleChange(e)}/>
                         <label className="form-label" htmlFor="form3Example97"></label>
-                      </div> 
+                        </div> */}
 
                       <div className="row">
                         <div className="col-md-6 mb-4">
