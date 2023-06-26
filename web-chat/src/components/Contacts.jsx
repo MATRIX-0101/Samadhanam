@@ -6,26 +6,50 @@ function Contacts({ contacts, currentUser, changeChat}) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
+    const [Admin,setAdmin] = useState(false);
+    console.log(contacts);
+    const Contacts = contacts.filter(function(a) {
+        
+        return a.admin==='100';
+    })
+    console.log(Contacts);
+    useEffect(()=>{
+        if(currentUser){
+            if(currentUser.admin==="100"){
+                setAdmin(true);
+            }
+        }
+        
+
+    }, [currentUser]);
 
     useEffect(() => {
-        if(currentUser){
-            // const str = currentUser.firstName+currentUser.lastName+currentUser.registrationnumber;
+        if(currentUser ){
+            
+                // const str = currentUser.firstName+currentUser.lastName+currentUser.registrationnumber;
             setCurrentUserImage(currentUser.avatarImage);
             // setCurrentUserName(currentUser.firstname);
             setCurrentUserName(currentUser.firstname+"_"+currentUser.lastname+"_"+currentUser.registrationnumber);
+            
+            
         }
     }, [currentUser]);
 
 
     const changeCurrentChat = (index, contact) => {
+        
         setCurrentSelected(index);
         changeChat(contact);
+        alert(`${contact.problemsynopsis}`);
         
     };
-
-    return <>
+    if(Admin){
+        return <>
         {
             currentUserImage && currentUserName && (
+                
+                    
+                
                 <Container>
                     <div className="brand">
                         <img src={Logo} alt="logo" />
@@ -33,7 +57,60 @@ function Contacts({ contacts, currentUser, changeChat}) {
                     </div>
                     <div className="contacts">
                          {
-                            contacts.map((contact, index)=> {
+                            contacts.map((a, index)=> {
+                                return (
+                                    <div className={`contact ${index === currentSelected ?"selected" : ""
+                                    }`} 
+                                    key={index}
+                                    onClick={()=>changeCurrentChat(index,a)}
+                                    >
+                                        <div className="avatar">
+                                            <img 
+                                            src={`data:image/svg+xml;base64,${a.avatarImage}`} 
+                                            alt="avatar"
+                                             />
+                                        </div>
+                                        <div className="username">
+                                            {/* <h6>{contact.firstname}</h6> */}
+                                            <h6>{a.firstname+"_"+a.lastname+"_"+a.registrationnumber}</h6>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                         }
+                    </div>
+
+                    <div className="current-user">
+                        <div className="avatar">
+                            <img 
+                            src={`data:image/svg+xml;base64,${currentUserImage}`} 
+                            alt="avatar"
+                             />
+                        </div>
+                        <div className="username">
+                            <h6>{currentUserName}</h6>
+                        </div>
+                    </div> 
+
+                </Container>
+            )
+        }
+    </>
+} else{
+    return <>
+        {
+            currentUserImage && currentUserName && (
+                
+                    
+                
+                <Container>
+                    <div className="brand">
+                        <img src={Logo} alt="logo" />
+                        <h7>samadhanam</h7>
+                    </div>
+                    <div className="contacts">
+                         {
+                            Contacts.map((contact, index)=> {
                                 return (
                                     <div className={`contact ${index === currentSelected ?"selected" : ""
                                     }`} 
@@ -64,7 +141,7 @@ function Contacts({ contacts, currentUser, changeChat}) {
                              />
                         </div>
                         <div className="username">
-                            <h7>{currentUserName}</h7>
+                            <h6>{currentUserName}</h6>
                         </div>
                     </div> 
 
@@ -73,6 +150,8 @@ function Contacts({ contacts, currentUser, changeChat}) {
         }
     </>
 }
+    }
+    
 
 const Container = styled.div`
     display: grid;

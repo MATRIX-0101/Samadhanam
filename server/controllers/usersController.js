@@ -4,7 +4,7 @@ const brcypt = require("bcrypt");
 module.exports.register = async (req,res,next) => {
     try{
         console.log(req.body);
-        const { firstname,lastname,password,emailID,gender,year,hostel,phonenumber,registrationnumber,course,problemsynopsis } = req.body;
+        const { firstname,lastname,password,emailID,gender,year,hostel,phonenumber,registrationnumber,course,problemsynopsis,admin } = req.body;
         const emailIDCheck = await User.findOne({ emailID });
         if(emailIDCheck)
             return res.json({msg: "Email already used", status: false});
@@ -21,6 +21,8 @@ module.exports.register = async (req,res,next) => {
             registrationnumber,
             course,
             problemsynopsis,
+            admin,
+            
         });
         delete user.password;
         return res.json({ user,status: true }); 
@@ -76,6 +78,10 @@ module.exports.getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find({ _id: { $ne: req.params.id }}).select([
             "emailID",
+            "gender",
+            "admin",
+            "year",
+            "problemsynopsis",
             "firstname",
             "lastname",
             "registrationnumber",

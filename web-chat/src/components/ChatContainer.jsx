@@ -14,9 +14,7 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
     const scrollRef = useRef();
 
 
-    function timeout(ms) {
-        return new Promise((resolve) => setTimeout(resolve,ms));
-    }
+    
 
     useEffect(() => {
         
@@ -29,7 +27,7 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
            });
            setMessages(response.data);
         }
-        };
+        
         getResponse();
     
         

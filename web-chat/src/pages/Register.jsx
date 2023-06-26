@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
-  
+
   const navigate = useNavigate();
   
   const [values,setvalues] = useState({
@@ -22,14 +22,14 @@ function Register() {
     registrationnumber:"",
     course:"",
     problemsynopsis:"",
-
+    admin:"",
   });
 
   const handleSubmit =  async(event) => {
     event.preventDefault();
     if(handleValidation()){
       console.log("invalidation",registerRoute);
-      const { firstname,lastname,password,emailID,gender,year,hostel,phonenumber,registrationnumber,course,problemsynopsis } = values;
+      const { firstname,lastname,password,emailID,gender,year,hostel,phonenumber,registrationnumber,course,problemsynopsis,admin } = values;
       const { data } = await axios.post(registerRoute,{
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
@@ -47,6 +47,7 @@ function Register() {
         registrationnumber,
         course,
         problemsynopsis,
+        admin,
       });
       if (data.status === false) {
         toast.error(data.msg, toastOptions);
@@ -73,7 +74,7 @@ function Register() {
 
   
   const handleValidation = () => {
-    const { firstname,lastname,password,confirmpassword,emailID,gender,year,hostel,phonenumber,registrationnumber,course,problemsynopsis } = values;
+    const { firstname,lastname,password,confirmpassword,emailID,gender,year,hostel,phonenumber,registrationnumber,course,problemsynopsis,admin } = values;
     if( password!==confirmpassword){
       toast.error("password and confirm password should be same.",toastOptions);
       return false;
@@ -83,7 +84,10 @@ function Register() {
     } else if(lastname.length>20){
       toast.error("Can't accept such a long last name!!!",toastOptions);
       return false;
-    } 
+    } else if(admin!=="100" && admin!==""){
+      toast.error("Sorry you are not an admin.",toastOptions);
+      return false;
+    }
     return true;
   };
   
@@ -222,9 +226,20 @@ function Register() {
                       </div>
       
                       <div className="form-outline mb-4">
-                        <input type="text" id="form3Example97" className="form-control form-control-lg" placeholder="Problemsynopsis" name="problemsynopsis" required onChange={(e) => handleChange(e)}/>
+                        <input type="text" id="form3Example97" className="form-control form-control-lg" placeholder="Problemsynopsis" name="problemsynopsis"  onChange={(e) => handleChange(e)}/>
                         <label className="form-label" htmlFor="form3Example97"></label>
+                      </div> 
+
+                      <div className="row">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
+                            <input type="password" id="form3Example1m1" className="form-control form-control-lg" placeholder="Admin-key" name="admin"  onChange={(e) => handleChange(e)}/>
+                            <label className="form-label" htmlFor="form3Example1m1"></label>
+                          </div>
+                        </div>
                       </div>
+
+                      
       
                       <div className="d-flex justify-content-end pt-3">
                         <button type="button" className="btn btn-light btn-lg" onClick={handleReset}>Reset all</button>

@@ -59,6 +59,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
+    admin: {
+        type: String,
+    }
 });
 
 module.exports = mongoose.model("Users",userSchema);
