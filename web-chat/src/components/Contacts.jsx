@@ -126,6 +126,7 @@ function Contacts({ contacts, currentUser, changeChat}) {
                                         <div className="username">
                                             {/* <h6>{contact.firstname}</h6> */}
                                             <h6>{contact.firstname+"_"+contact.lastname+"_"+contact.registrationnumber}</h6>
+                                            {/* <div className="offline">offline</div> */}
                                         </div>
                                     </div>
                                 );
@@ -158,6 +159,9 @@ const Container = styled.div`
     grid-template-rows: 10% 75% 15%;
     overflow: hidden;
     background-color: #080420;
+    .offline{
+        color:red;
+    }
     .brand {
           display: flex;
           align-items: center;

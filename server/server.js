@@ -58,7 +58,7 @@ const io = socket(server,{
 //     },
 //   });
 
-global.onlineUsers = new Map();
+const onlineUsers = new Map();
 
 io.on("connection",(socket)=>{
   console.log("connected to socket.id :", socket.id);
@@ -66,23 +66,36 @@ io.on("connection",(socket)=>{
 
     socket.on("add-user",(userID)=>{
         onlineUsers.set(userID, socket.id);
-        // console.log("userID/ currentUserid = ",userID);
-    });
-    // socket.on("temp",(err)=>{
-    //   // onlineUsers.set( socket.id);
-    //   console.log("message is :",err);
-    // });
+       
+        io.emit("online-users", Array.from(onlineUsers.keys()));
 
-    socket.on("send-msg", (data)=>{
+        
+    });
+   
+
+    socket.on('send-msg', (data)=>{
         console.log("message",{ data });
         const sendUserSocket = onlineUsers.get(data.to);
         // console.log("sendUserSocket to chat id :", data.to);
         // console.log("sendUserSocket is :", sendUserSocket);
-        if(sendUserSocket) {
-            // console.log("dataa sent is : ", data.message);
+        if(!sendUserSocket) {
+            console.log("dataa sent is : ", data.message);
             socket.to(sendUserSocket).emit("msg-receive",data.message);
             
         }
+    });
+
+    socket.on("disconnect", () => {
+      for (const [userId, socketId] of onlineUsers.entries()) {
+        if (socketId === socket.id) {
+          onlineUsers.delete(userId);
+          console.log("Online users:", onlineUsers);
+  
+          // Emit the updated online users list to all clients
+          io.emit("online-users", Array.from(onlineUsers.keys()));
+          break;
+        }
+      }
     });
 
 });

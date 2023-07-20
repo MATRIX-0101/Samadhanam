@@ -20,7 +20,7 @@
     "react-input-emoji": "^5.1.0",
     "react-router-dom": "^6.12.1",
     "react-scripts": "^5.0.1",
-    "react-toastify": "^9.0.3",
+    "react-toastify": "^9.1.3",
     "react-uuid": "^2.0.0",
     "socket.io": "^4.7.0",
     "socket.io-client": "^4.7.0",

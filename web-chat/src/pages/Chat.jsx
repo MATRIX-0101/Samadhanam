@@ -15,11 +15,12 @@ function Chat() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat,setCurrentChat] = useState(undefined);
   const [isLoaded,setIsLoaded] = useState(false);
+  const [onlineUsers,setOnlineUsers] = useState([]);
   useEffect(() => {
     const setDefaultlogin = async() =>{
         
         if(!localStorage.getItem("web-chat-user")) {
-            navigate("/login");
+            navigate("/login"); 
         }
         else {
           
@@ -35,16 +36,37 @@ useEffect(()=>{
   if(currentUser) {
     // socket.current = io("http://localhost:5000",{ transport: ['websocket'] });
     // console.log(socket.current.connected);
-    socket.current = io("http://localhost:5000", { transport: ['websocket' ] });
+    // socket.current = io("http://localhost:5000", { transport: ['websocket' ] });
+    socket.current = io('http://localhost:5000');
     // console.log(socket.current.connected);
-
+      // socket.current.on('get-users',(users)=>{
+      //   setOnlineUsers(users);
+      // })
 
     socket.current.emit("add-user",currentUser._id);
+
+    socket.current.on("online-users",(users)=>{
+      setOnlineUsers(users);
+    })
+    
 
     console.log(currentUser._id)
   }
 
 },[currentUser])
+
+// useEffect(()=>{
+//   if(currentUser){
+// socket.current = io('http://localhost:5000');
+
+// socket.current.emit("add-user",currentUser._id);
+// socket.current.on('get-users',(users)=>{
+//   setOnlineUsers(users);
+// })
+//   }
+// },[currentUser]);
+
+
 
  useEffect(() => {
    const setAvatarAgain = async() =>{
@@ -66,7 +88,14 @@ useEffect(()=>{
   setCurrentChat(chat);
 
  }
+ const checkStatus=(currentChat)=>{
+  if(currentChat !== undefined){
+  if(isUserOnline(currentChat._id)) return true;
 
+  }
+  return false;
+ }
+ const isUserOnline = (userId) => onlineUsers.includes(userId);
   return (
     <Container>
       <div className="container">
@@ -76,7 +105,7 @@ useEffect(()=>{
           isLoaded && currentChat === undefined ?(
           <Welcome CurrentUser={currentUser} />) :
           (
-            <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />
+            <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} isOnline = {checkStatus(currentChat)} />
           )
 
         }
@@ -106,3 +135,6 @@ const Container = styled.div`
 `;
 
 export default Chat;
+
+
+
