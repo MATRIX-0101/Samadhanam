@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { loginRoute } from "../utils/APIRoutes";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import './style.css';
 function Login() {
   
   const navigate = useNavigate();
@@ -73,53 +73,30 @@ function Login() {
   const handleChange = (event) => {
       setvalues({ ...values, [event.target.name]: event.target.value});    
   };
+  
    
 
   return (
     
     <>
-    <form onSubmit={(event) => handleSubmit(event)}>
-    <div>
+    <div className="login">
+    <form className="form" onSubmit={(event) => handleSubmit(event)}>
+    
+    <div className="mainClass">
       {/* <!-- Pills navs --> */}
-      <div className="container">
-        <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-          <li className="nav-item" role="presentation">
-            <a
-              className="nav-link active"
-              id="tab-login"
-              data-mdb-toggle="pill"
-              href="#pills-login"
-              role="tab"
-              aria-controls="pills-login"
-              aria-selected="true"
-            >
-              Login
-            </a>
-          </li>
-          <li className="nav-item" role="presentation">
-            <a
-              className="nav-link"
-              id="tab-register"
-              data-mdb-toggle="pill"
-              href="register"
-              role="tab"
-              aria-controls="pills-register"
-              aria-selected="false"
-            >
-              Register
-            </a>
-          </li>
-        </ul>
-
-        <div className="form-outline mb-4">
+      
+        <div className="background">
+      <div className="loginLogo" >
+          <h4 >
+            <span className="logospan"><b>S</b></span>amadhanam
+          </h4>
+      </div>
+        <div className="inputVals">
           <input type="email" id="loginName" className="form-control" name="emailID" placeholder="E-mail" onChange={(e) => handleChange(e)}/>
           <label className="form-label" htmlFor="loginName">
           </label>
-        </div>
-
-        {/* <!-- Password input --> */}
-        <div className="form-outline mb-4">
-          <input type="password" id="loginPassword" className="form-control" name="password" placeholder="Password" onChange={(e) => handleChange(e)}/>
+        
+          <input type="password" id="loginPassword" className="form-control" name="password" placeholder="Password" onChange={(e) => handleChange(e)} />
           <label className="form-label" htmlFor="loginPassword">
           </label>
         </div>
@@ -129,7 +106,7 @@ function Login() {
           <div className="col-md-6 d-flex justify-content-center"></div>
 
           {/* <!-- Submit button --> */}
-          <button type="submit" className="btn btn-primary btn-block mb-4">
+          <button type="submit" className="btn-primary ">
             Login
           </button>
 
@@ -139,10 +116,12 @@ function Login() {
               Not a member? <a href="register">Register</a>
             </p>
           </div>
+          </div>
         </div>
-      </div>
-    </div>
+        </div>
+    
     </form>
+    </div>
     <ToastContainer/>
     </>
     
