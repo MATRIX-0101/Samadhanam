@@ -1,48 +1,30 @@
 import React from 'react'
-
+import './style.css'
+import NavBar from './NavBar';
 function Menu() {
+  
+    
+  function toggleMenu() {
+    console.log("toggled");
+    var menu = document.getElementById("menu");
+    menu.classList.toggle("show");
+  }
+
+  
+
+  
   return (
-    <div>
-        {/* <!-- upper nav bar  --> */}
-        <nav className="navbar" style={{width: '100%',
-  height: '10rem',
-  display: 'grid',
-  gridTemplateColumns: '10rem 2fr 3fr 10rem',
-  boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.25);',
-  backgroundColor:'#1ABC9C'}}>
-    {/* 1st logo part  */}
-    <div className="logo" style={{
-      display: 'grid',
-      //backgroundColor: '#3b5998',
-      gridColumn:'2/3',
-      justifyContent: 'start',
-      alignItems: 'center'
-    }}>
-          <h2 style={{ background: 'linear-gradient(45deg, #FFC107, #FF5722)',
-    color: '#FFF',
-    padding: '2px 4px',
-    borderRadius: '4px',
-    fontWeight: 'bold',
-    color: 'white',
-  textShadow: '1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue' }}>
-            <span>S</span>amadhanam
-          </h2>
-      </div>
-    <div className="navbar-top" style={{
-      height: '10rem', 
-      display: 'flex', 
-      justifyContent: 'space-around',
-      gridColumn: '3/4', 
-      alignItems: 'center'
-    }}>
-      <a className="nav-item nav-link active" href="/">Home</a>
-      <a className="nav-item nav-link active" href="/">Features</a>
-      <a className="nav-item nav-link active" href="login" style={{border: '2px solid black', padding: '10px'}}>Login</a>
-      <a className="nav-item nav-link active" href="register" style={{border: '2px solid black', padding: '10px'}}>Register</a>
-    </div>
-  </nav>
+    <>
+    <NavBar/>
+
+    
+ 
+
+  
+ 
+  
 {/* <!-- upper nav bar end  --> */}
-  <nav className="navbar navbar-expand-lg bg-body-tertiary">
+  {/* <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container-fluid">
       <a className="navbar-brand" href="/">Anger</a>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown1" aria-controls="navbarNavDropdown1" aria-expanded="false" aria-label="Toggle navigation">
@@ -539,8 +521,9 @@ function Menu() {
         </ul>
       </div>
     </div>
-  </nav>
-  </div>
+  </nav> */}
+  
+  </>
   )
 }
 

@@ -1,0 +1,214 @@
+
+button:hover{
+  size: 2x;
+}
+/* Style for the background color */
+/* Style for the background image */
+.login {
+  min-height: 100vh;
+  background-image: url("./background.webp");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* Fallback background color */
+}
+
+/* ... (other CSS styles remain the same) ... */
+
+
+/* ... (other CSS styles remain the same) ... */
+
+.mainClass{
+  text-align: center;
+  max-width: 400px;
+  background-attachment:fixed;
+  /* border: 1px solid #1b1a1bf0; */
+ 
+  margin-left: 550px;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 50%;
+  background: transparent;
+  /* background-color: rgba(169, 155, 155, 0.639);  */
+  border-radius: 17px;
+ height: 450px;
+  
+}
+
+.btn-primary{
+  background-color:rgb(0, 0, 255);
+  border-radius: 5px;
+  color:white;
+  width:100px;
+ 
+  padding: 4px;
+  margin-left: -55px;
+}
+.inputVals{
+  
+  width:90%;
+  margin-left: 40px;
+  background: transparent;
+ 
+  
+}
+#loginName{
+  height:45px;
+  border-left:#f9f9f9;
+  border-top:#f9f9f9;
+  border-right:#f9f9f9;
+  border-bottom: 4px solid rgb(0,0,0);
+  background:transparent;
+}
+
+#loginPassword{
+  height:45px;
+  border-left:#f9f9f9;
+  border-top:#f9f9f9;
+  border-right:#f9f9f9;
+  border-bottom: 4px solid rgb(0, 0, 0);
+  background:transparent;
+}
+a{
+  text-decoration: none;
+}
+.logo{
+  text-align: center;
+  margin-left: 10px;
+}
+.logospan{
+color:blue;
+}
+.loginLogo{
+  text-align: center;
+  width: 150px;
+  /* background: linear-gradient(45deg, #FFC107, #FF5722); */
+  
+  margin-top: 70px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  margin-left: 107px;
+  text :blue;
+  textShadow: 1px 1px 20px black, 0 0 25px blue, 0 0 50px darkblue;
+}
+
+
+
+
+
+.Anchor{
+    text-decoration: none;
+    border-width: 20px;
+    margin:20px;
+    padding:3px;
+    color:solid black;
+    border-radius: 5px;
+    text-decoration:red;
+    padding: 10px;
+    
+}
+.Anchor:hover{
+    
+    background-color: rgba(128, 0, 21, 0.461);
+    transition-duration: 1s;
+}
+.conatiner{
+    margin:50px;
+    background-color: blue;
+}
+.mainDiv{
+    background-color:darkslategrey;
+}
+.mainDiv:hover{
+    background-color:cornflowerblue;
+    transition-duration: 1.5s;
+}
+.navbar{
+    width: 100%;
+  height: 5rem;
+  display: grid;
+  gridTemplateColumns: '3rem 2fr 3fr ';
+  boxShadow: 2px 2px 4px rgb(26 187 188 / 33%);
+  backgroundColor:'#7bb198'
+}
+
+
+
+.problem-container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    background-color:bisque;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 300px;
+    margin: 10px;
+  }
+  
+  
+  .solution-details {
+    text-align: center;
+  }
+  
+ 
+.dropdown-button {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  
+  .line {
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+  }
+  .position{
+    position: absolute;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    
+    left: 100px;
+  }
+  
+  .show {
+    display: block;
+    
+  }
+  
+  
+  .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-menu li {
+    margin-bottom: 5px;
+    
+  }
+  
+  .dropdown-menu a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .dropdown-menu a:hover {
+    color: #007bff;
+  }
+  
+  
+  
+ 
+ 

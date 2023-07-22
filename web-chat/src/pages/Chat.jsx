@@ -20,7 +20,7 @@ function Chat() {
     const setDefaultlogin = async() =>{
         
         if(!localStorage.getItem("web-chat-user")) {
-            navigate("/login"); 
+            navigate("/login");
         }
         else {
           
@@ -36,37 +36,18 @@ useEffect(()=>{
   if(currentUser) {
     // socket.current = io("http://localhost:5000",{ transport: ['websocket'] });
     // console.log(socket.current.connected);
-    // socket.current = io("http://localhost:5000", { transport: ['websocket' ] });
-    socket.current = io('http://localhost:5000');
+    socket.current = io("http://localhost:5000", { transport: ['websocket' ] });
     // console.log(socket.current.connected);
-      // socket.current.on('get-users',(users)=>{
-      //   setOnlineUsers(users);
-      // })
+
 
     socket.current.emit("add-user",currentUser._id);
-
     socket.current.on("online-users",(users)=>{
       setOnlineUsers(users);
     })
-    
-
     console.log(currentUser._id)
   }
 
 },[currentUser])
-
-// useEffect(()=>{
-//   if(currentUser){
-// socket.current = io('http://localhost:5000');
-
-// socket.current.emit("add-user",currentUser._id);
-// socket.current.on('get-users',(users)=>{
-//   setOnlineUsers(users);
-// })
-//   }
-// },[currentUser]);
-
-
 
  useEffect(() => {
    const setAvatarAgain = async() =>{
@@ -95,6 +76,7 @@ useEffect(()=>{
   }
   return false;
  }
+ 
  const isUserOnline = (userId) => onlineUsers.includes(userId);
   return (
     <Container>
@@ -105,7 +87,7 @@ useEffect(()=>{
           isLoaded && currentChat === undefined ?(
           <Welcome CurrentUser={currentUser} />) :
           (
-            <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} isOnline = {checkStatus(currentChat)} />
+            <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} isOnline={checkStatus(currentChat)}/>
           )
 
         }
@@ -135,6 +117,3 @@ const Container = styled.div`
 `;
 
 export default Chat;
-
-
-

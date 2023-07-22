@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {BiPowerOff} from 'react-icons/bi';
-
-export default function Logout() {
+import {io} from 'socket.io-client'
+export default function Logout({socket}) {
+    // const socket = useRef();
     const navigate = useNavigate();
     const handleClick = async () => {
         localStorage.clear();
+        console.log(socket);
+
+        socket.current.emit("logout",socket.current.id);
+    console.log(socket.current.id);
+        
+        
         navigate("/login");
     };
 

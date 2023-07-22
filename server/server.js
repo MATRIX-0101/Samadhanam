@@ -35,7 +35,7 @@ const server = app.listen(process.env.PORT,()=> {
 
 const io = socket(server,{
     cors:{
-        // origin:"https://127.0.0.1:3000",
+        // origin:"https://127.0.0.1:3000",  
         origin: '*',
         // origin: "http://localhost:5000",
         credentials: true,
@@ -58,45 +58,79 @@ const io = socket(server,{
 //     },
 //   });
 
-const onlineUsers = new Map();
-
+global.onlineUsers = new Map();
+const activeUsers = [];
 io.on("connection",(socket)=>{
   console.log("connected to socket.id :", socket.id);
     global.chatSocket = socket;
 
     socket.on("add-user",(userID)=>{
         onlineUsers.set(userID, socket.id);
-       
-        io.emit("online-users", Array.from(onlineUsers.keys()));
-
-        
+        // console.log("userID/ currentUserid = ",userID);
+        activeUsers.push(userID);
+        io.emit("online-users",activeUsers);
     });
-   
+    // socket.on("temp",(err)=>{
+    //   // onlineUsers.set( socket.id);
+    //   console.log("message is :",err);
+    // });
 
-    socket.on('send-msg', (data)=>{
+    socket.on("send-msg", (data)=>{
         console.log("message",{ data });
         const sendUserSocket = onlineUsers.get(data.to);
         // console.log("sendUserSocket to chat id :", data.to);
         // console.log("sendUserSocket is :", sendUserSocket);
-        if(!sendUserSocket) {
-            console.log("dataa sent is : ", data.message);
+        if(sendUserSocket) {
+            // console.log("dataa sent is : ", data.message);
             socket.to(sendUserSocket).emit("msg-receive",data.message);
             
         }
     });
+   
 
-    socket.on("disconnect", () => {
-      for (const [userId, socketId] of onlineUsers.entries()) {
-        if (socketId === socket.id) {
-          onlineUsers.delete(userId);
-          console.log("Online users:", onlineUsers);
-  
-          // Emit the updated online users list to all clients
-          io.emit("online-users", Array.from(onlineUsers.keys()));
-          break;
-        }
-      }
-    });
+    //here logout part
+
+    socket.on("logout",(socketID)=>{
+      console.log("logged out successfully",socketID);
+      const socketIdToFind = socketID; // The socketId you want to find the userId for
+
+let foundUserId = null;
+
+for (const [userId, socketId] of onlineUsers.entries()) {
+  if (socketId === socketIdToFind) {
+    foundUserId = userId;
+    break; // Exit the loop once the userId is found
+  }
+}
+    const indexToRemove = activeUsers.indexOf(foundUserId);
+if (indexToRemove !== -1) {
+  activeUsers.splice(indexToRemove, 1);
+}
+onlineUsers.delete(foundUserId);
+io.emit("online-users",activeUsers);
+    })
+   socket.on("disconnect",()=>{
+    console.log("disConnected");
+console.log(socket.id);
+
+const socketIdToFind = socket.id; // The socketId you want to find the userId for
+
+let foundUserId = null;
+
+for (const [userId, socketId] of onlineUsers.entries()) {
+  if (socketId === socketIdToFind) {
+    foundUserId = userId;
+    break; // Exit the loop once the userId is found
+  }
+}
+    const indexToRemove = activeUsers.indexOf(foundUserId);
+if (indexToRemove !== -1) {
+  activeUsers.splice(indexToRemove, 1);
+}
+onlineUsers.delete(foundUserId);
+io.emit("online-users",activeUsers);
+   })
+
+   
 
 });
-
