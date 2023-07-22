@@ -1,18 +1,8 @@
-import React from 'react'
-import './style.css'
-import NavBar from './NavBar';
+import React, { useState } from 'react';
+import prob from './Menu_Data.json';
+
 function Menu() {
-  
-    
-  function toggleMenu() {
-    console.log("toggled");
-    var menu = document.getElementById("menu");
-    menu.classList.toggle("show");
-  }
-
-  
-
-  
+  // const [coloumn, setColoumn] = useState([])
   return (
     <>
     <NavBar/>
@@ -24,6 +14,7 @@ function Menu() {
  
   
 {/* <!-- upper nav bar end  --> */}
+<<<<<<< HEAD
   {/* <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container-fluid">
       <a className="navbar-brand" href="/">Anger</a>
@@ -50,31 +41,41 @@ function Menu() {
       </div>
     </div>
   </nav>
+=======
+>>>>>>> master
 
-  <nav className="navbar navbar-expand-lg bg-body-tertiary">
-    <div className="container-fluid">
-      <a className="navbar-brand" href="/">Greed</a>
-      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown2" aria-controls="navbarNavDropdown2" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNavDropdown2">
-        <ul className="navbar-nav">
-       
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Solutions
-            </a>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="https://vedabase.io/en/library/bg/14/17/">Chapter 14 - Text 17</a></li>
-              <li><a className="dropdown-item" href="https://vedabase.io/en/library/bg/16/21/">Chapter 16 - Text 21</a></li>
-              <li><a className="dropdown-item" href="https://vedabase.io/en/library/bg/17/25/">Chapter 17 - Text 25</a></li>
+    {prob.problems.map((problems) => {
+      return (
+            <nav key={problems.id} className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="/">{problems.name}</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown1" aria-controls="navbarNavDropdown1" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id={problems.id}>
+          {/* <div className="collapse navbar-collapse" key={problems.id} id="navbarNavDropdown1"> */}
+            <ul className="navbar-nav">
+          
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Solutions
+                </a>
+                <ul className="dropdown-menu">
+                    {problems.solutions.map((solutions) => {
+                      return (
+                        <li><a className="dropdown-item" key={solutions.no}href={solutions.link}>{solutions.source}</a></li>
+                      )
+                    })}
+                </ul>
+              </li>
             </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+          </div>
+        </div>
+      </nav>
+          )
+    })}
 
+<<<<<<< HEAD
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container-fluid">
       <a className="navbar-brand" href="/">Confusion</a>
@@ -524,7 +525,10 @@ function Menu() {
   </nav> */}
   
   </>
+=======
+  </div>
+>>>>>>> master
   )
 }
 
-export default Menu
+export default Menu;
