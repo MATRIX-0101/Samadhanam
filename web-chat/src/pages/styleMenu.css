@@ -1,0 +1,38 @@
+.container-fluid{
+    /* background-color: red; */
+    width: 100%;
+    /* border-bottom: 2px solid red; */
+    border-radius: 2px;
+    
+    
+}
+.menu{
+    text-align: center;
+    width: 70%;
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 8px;
+    display: grid;
+   margin-left: 90px;
+    height:150px;
+}
+
+  .dropdown-item{
+   margin:20px;
+   width:85%;
+   border-bottom: 1px solid black;
+   border-radius: 2px;
+  }
+  .dropdown-item:hover{
+    color: green;
+  }
+  .outer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    background-color: rgba(191, 187, 178, 0.258);
+  }
+  a{
+    text-decoration: none;
+    text:black;
+  }
+ 
