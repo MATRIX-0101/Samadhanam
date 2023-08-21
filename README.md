@@ -18,7 +18,7 @@
                   f) **_Admin Dashboard_**
                     :- Admin users have access to a dedicated dashboard.
                     :- Admins can view and manage user accounts to maintain student privacy and offer effective support.
-**_Tech Stacks_** :
+##**_Tech Stacks_** :
               a) **_front-end_** : HTML,CSS,JavaScript,ReactJs,Bootstrap.
               b) **_Back-end_** : Node.Js.
               c) **_Database_** : MongoDB.
