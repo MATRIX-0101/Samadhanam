@@ -40,26 +40,26 @@ function SetAvatar() {
             toast.error("Please select an Avatar of your choice",toastOptions);
         }
         else{
-            console.log(`selected avatar is ${selectedAvatar}`);
-            console.log(localStorage.getItem("web-chat-user"));
+            // console.log(`selected avatar is ${selectedAvatar}`);
+            // console.log(localStorage.getItem("web-chat-user"));
             const user = await JSON.parse(localStorage.getItem("web-chat-user"));
-            console.log(`${user._id}`);
+            // console.log(`${user._id}`);
 
             const url = `${setAvatarRoute}/${user._id}`;
             // const url = `${user._id}`;
-            console.log(url);
+            // console.log(url);
 
             const {data} = await axios.post(url,{
                 image:avatars[selectedAvatar], 
             });
 
-            console.log(data);
+            // console.log(data);
 
             if(data.isSet) {
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
                 localStorage.setItem("web-chat-user", JSON.stringify(user));
-                console.log("avarar data stored in localStorage"+user);
+                // console.log("avarar data stored in localStorage"+user);
 
                 navigate("/chat"); 
             } else {
@@ -102,7 +102,7 @@ function SetAvatar() {
         };
 
         fetchData();
-        console.log("data fetched successful");
+        // console.log("data fetched successful");
     }, []);
 
 

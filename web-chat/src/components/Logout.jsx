@@ -9,10 +9,10 @@ export default function Logout({socket}) {
     const navigate = useNavigate();
     const handleClick = async () => {
         localStorage.clear();
-        console.log(socket);
+        // console.log(socket);
 
         socket.current.emit("logout",socket.current.id);
-    console.log(socket.current.id);
+    // console.log(socket.current.id);
         
         
         navigate("/login");

@@ -18,7 +18,7 @@ function Login() {
   const handleSubmit =  async(event) => {
     event.preventDefault();
     if(handleValidation()){
-      console.log("invalidation",loginRoute);
+      // console.log("invalidation",loginRoute);
       const { emailID,password } = values;
       const { data } = await axios.post(loginRoute,{
         headers: {
@@ -34,11 +34,11 @@ function Login() {
       }
       if (data.status === true) {
         toast.error(data.msg, toastOptions);
-        console.log(`Login status true`)
+        // console.log(`Login status true`)
         localStorage.setItem("web-chat-user",JSON.stringify(data.user));
-        console.log(`before login to chat navigate`)
+        // console.log(`before login to chat navigate`)
         navigate("/chat");
-        console.log(`after login to chat navigate`)
+        // console.log(`after login to chat navigate`)
       } 
        
     }

@@ -27,7 +27,7 @@ function Register() {
   const handleSubmit =  async(event) => {
     event.preventDefault();
     if(handleValidation()){
-      console.log("invalidation",registerRoute);
+      // console.log("invalidation",registerRoute);
       const { firstname,lastname,password,emailID,gender,year,hostel,phonenumber,registrationnumber,course,admin } = values;
       const { data } = await axios.post(registerRoute,{
         headers: {
@@ -52,7 +52,7 @@ function Register() {
       }
       if (data.status === true) {
         localStorage.setItem("web-chat-user",JSON.stringify(data.user));
-        console.log("data stored in localStorage"+data.user);
+        // console.log("data stored in localStorage"+data.user);
         toast.error(data.msg, toastOptions);
         navigate("/setAvatar");
       } 

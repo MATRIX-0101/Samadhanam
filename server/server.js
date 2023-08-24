@@ -36,8 +36,8 @@ const server = app.listen(process.env.PORT,()=> {
 const io = socket(server,{
     cors:{
         // origin:"https://127.0.0.1:3000",  
-        origin: '*',
-        // origin: "http://localhost:5000",
+        // origin: '*',
+        origin: "http://localhost:3000",
         credentials: true,
         methods: ["GET", "POST"],
     },
@@ -61,12 +61,10 @@ const io = socket(server,{
 global.onlineUsers = new Map();
 const activeUsers = [];
 io.on("connection",(socket)=>{
-  console.log("connected to socket.id :", socket.id);
     global.chatSocket = socket;
 
     socket.on("add-user",(userID)=>{
         onlineUsers.set(userID, socket.id);
-        // console.log("userID/ currentUserid = ",userID);
         activeUsers.push(userID);
         io.emit("online-users",activeUsers);
     });
@@ -76,16 +74,9 @@ io.on("connection",(socket)=>{
     // });
 
     socket.on("send-msg", (data)=>{
-        console.log("message",{ data });
         const sendUserSocket = onlineUsers.get(data.to);
-        // console.log("sendUserSocket to chat id :", data.to);
-        // console.log("sendUserSocket is :", sendUserSocket);
-        console.log("recieved data is ",data);
-        console.log(data.from);
         if(sendUserSocket) {
-            // console.log("dataa sent is : ", data.message);
-            socket.to(sendUserSocket).emit("msg-receive",data.message,data.from);
-            
+            socket.to(sendUserSocket).emit("msg-receive",data.message,data.from);   
         }
     });
    
