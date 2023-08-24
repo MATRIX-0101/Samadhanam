@@ -84,7 +84,7 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
     // }, [currentChat]);
     
     useEffect(() => {
-      console.log("Current chat ID:", currentChat?._id);
+      // console.log("Current chat ID:", currentChat?._id);
     
       const getResponse = async () => {
         if (currentChat) {
@@ -100,11 +100,11 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
     
       if (socket.current) {
         socket.current.on("msg-receive", (msg, senderId) => {
-          console.log("Received message:", msg);
-          console.log("Sender ID:", senderId);
+          // console.log("Received message:", msg);
+          // console.log("Sender ID:", senderId);
           
           if (senderId === currentChat?._id) {
-            console.log("Received message from current chat");
+            // console.log("Received message from current chat");
             setArrivalMessage({ fromSelf: false, message: msg });
           }
         });
