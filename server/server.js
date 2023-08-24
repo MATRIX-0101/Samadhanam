@@ -8,11 +8,21 @@ const dotenv = require("dotenv");
 const app = express();
 require("dotenv").config(); 
 
+const path = require('path');
+
  app.use(cors());
  app.use(express.json());
 
  app.use("/api/auth",userRoutes);
  app.use("/api/messages",messageRoute);
+
+
+ //static files
+ app.use(express.static(path.join(__dirname, './web-chat/build')));
+
+app.get("*", function (req, res){
+    res.sendFile(path.join(__dirname, "./web-chat/build/index.html"));
+});
 
 app.get('/users/:id', function (req, res, next) {
     res.json({msg: 'This is CORS-enabled for all origins!'});
@@ -23,14 +33,14 @@ mongoose.connect(process.env.LOCAL_DB_URL, {
     useUnifiedTopology: true,
 })
 .then(() => {
-    console.log("DB Connection Successful");
+    // console.log("DB Connection Successful");
 })
 .catch((err) => {
-    console.log(err.message);
+    // console.log(err.message);
 })
 
 const server = app.listen(process.env.PORT,()=> {
-    console.log(`Server is connected on PORT : ${process.env.PORT}`);
+    // console.log(`Server is connected on PORT : ${process.env.PORT}`);
 })
 
 const io = socket(server,{
