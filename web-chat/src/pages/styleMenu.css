@@ -29,7 +29,7 @@
   .outer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr ;
-    background-color: rgba(191, 187, 178, 0.258);
+    background-color: #c99c98;
   }
   a{
     text-decoration: none;

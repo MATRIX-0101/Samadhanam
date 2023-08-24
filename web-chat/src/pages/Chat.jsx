@@ -44,7 +44,7 @@ useEffect(()=>{
     socket.current.on("online-users",(users)=>{
       setOnlineUsers(users);
     })
-    console.log(currentUser._id)
+    // console.log(currentUser._id)
   }
 
 },[currentUser])
@@ -66,9 +66,13 @@ useEffect(()=>{
  }, [currentUser]);
 
  const handleChatChange = (chat) => {
+  
+  
   setCurrentChat(chat);
+  
 
  }
+//  console.log(currentChat);
  const checkStatus=(currentChat)=>{
   if(currentChat !== undefined){
   if(isUserOnline(currentChat._id)) return true;
@@ -78,6 +82,7 @@ useEffect(()=>{
  }
  
  const isUserOnline = (userId) => onlineUsers.includes(userId);
+ 
   return (
     <Container>
       <div className="container">

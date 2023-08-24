@@ -7,12 +7,12 @@ function Contacts({ contacts, currentUser, changeChat}) {
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
     const [Admin,setAdmin] = useState(false);
-    console.log(contacts);
+    // console.log(contacts);
     const Contacts = contacts.filter(function(a) {
         
         return a.admin==='100';
     })
-    console.log(Contacts);
+    // console.log(Contacts);
     useEffect(()=>{
         if(currentUser){
             if(currentUser.admin==="100"){
@@ -35,14 +35,17 @@ function Contacts({ contacts, currentUser, changeChat}) {
         }
     }, [currentUser]);
 
+    
+        const changeCurrentChat = (index, contact) => { 
+            setCurrentSelected(index);
+            changeChat(contact); 
+        };
+       
 
-    const changeCurrentChat = (index, contact) => {
-        
-        setCurrentSelected(index);
-        changeChat(contact);
-        
-        
-    };
+    // const changeCurrentChat = (index, contact) => { 
+    //     setCurrentSelected(index);
+    //     changeChat(contact); 
+    // };
     if(Admin){
         return <>
         {

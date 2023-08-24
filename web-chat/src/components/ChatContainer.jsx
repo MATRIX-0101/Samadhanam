@@ -7,12 +7,12 @@ import axios from 'axios';
 import { v4 as uuidv4} from "uuid";
 
 export default function ChatContainer({currentChat,currentUser,socket,isOnline}) {
-
+  // console.log(currentChat);
     const [messages, setMessages] = useState([]);
     const [arrivalMessage,setArrivalMessage] = useState(null); 
     
     const scrollRef = useRef();
-    
+     
 
     
 
@@ -47,7 +47,45 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
     // }, []);
 
 
+    // useEffect(() => {
+      // const getResponse = async () => {
+      //   if (currentChat) {
+      //     const response = await axios.post(getAllMessagesRoute, {
+      //       from: currentUser._id,
+      //       to: currentChat._id,
+      //     });
+      //     setMessages(response.data);
+      //   }
+      // };
+    
+      // getResponse();
+    
+      
+      // if (socket.current) {
+      //   socket.current.on("msg-receive", (msg,senderId) => {
+      //     // console.log(currentChat);
+      //     console.log("msg received");
+      //     if(senderId == currentChat._id){
+      //       console.log(true);
+      //       setArrivalMessage({ fromSelf: false, message: msg });
+      //     }
+      //     // console.log(senderId == currentChat._id);
+          
+          
+      //   });
+      // }
+      
+      // return () => {
+      //   if (socket.current) {
+      //     socket.current.off("msg-receive");
+      //   }
+      // };
+      
+    // }, [currentChat]);
+    
     useEffect(() => {
+      console.log("Current chat ID:", currentChat?._id);
+    
       const getResponse = async () => {
         if (currentChat) {
           const response = await axios.post(getAllMessagesRoute, {
@@ -61,18 +99,23 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
       getResponse();
     
       if (socket.current) {
-        socket.current.on("msg-receive", (msg) => {
-          setArrivalMessage({ fromSelf: false, message: msg });
+        socket.current.on("msg-receive", (msg, senderId) => {
+          console.log("Received message:", msg);
+          console.log("Sender ID:", senderId);
+          
+          if (senderId === currentChat?._id) {
+            console.log("Received message from current chat");
+            setArrivalMessage({ fromSelf: false, message: msg });
+          }
         });
       }
     
-      
-      // return () => {
-      //   if (socket.current) {
-      //     socket.current.off("msg-receive");
-      //   }
-      // };
-    }, [currentChat, currentUser, socket]);
+      return () => {
+        if (socket.current) {
+          socket.current.off("msg-receive");
+        }
+      };
+    }, [currentChat]);
     
 
 
@@ -104,7 +147,7 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
         scrollRef.current?.scrollIntoView({behaviour:"smooth"});
     }, [messages]);
     
-    console.log(messages);
+    // console.log("current chat is ",currentChat);
     return( 
     <>
     {currentChat &&(
@@ -125,7 +168,7 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
             </div>
             <Logout socket={socket}/>
         </div>
-        {/* <Messages /> */}
+        
         <div className="chat-messages">
             {
                 messages.map((message) => {
@@ -225,7 +268,7 @@ const Container = styled.div`
      .received {
         justify-content: flex-start;
         .content {
-          background-color: #9900ff20;
+          background-color: E7D9DE;
         }
     }
   }
