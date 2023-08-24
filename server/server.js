@@ -80,9 +80,11 @@ io.on("connection",(socket)=>{
         const sendUserSocket = onlineUsers.get(data.to);
         // console.log("sendUserSocket to chat id :", data.to);
         // console.log("sendUserSocket is :", sendUserSocket);
+        console.log("recieved data is ",data);
+        console.log(data.from);
         if(sendUserSocket) {
             // console.log("dataa sent is : ", data.message);
-            socket.to(sendUserSocket).emit("msg-receive",data.message);
+            socket.to(sendUserSocket).emit("msg-receive",data.message,data.from);
             
         }
     });
