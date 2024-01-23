@@ -2,11 +2,12 @@ const messageModel = require("../model/messageModel");
 
 module.exports.addMessage = async (req,res,next) => {
   try{
-    const { from, to , message } = req.body;
+    const { from, to , message,seen} = req.body;
     const data = await messageModel.create({
         message: { text: message },
         users: [from,to],
         sender: from,
+        seen:seen,
     });
     if (data) return res.json({ msg: "Messsage added successfully." });
     return res.json({ msg: "Failed to add message to the database." });
@@ -29,6 +30,8 @@ module.exports.getAllMessage = async (req,res,next) => {
       return {
         fromSelf: msg.sender.toString() === from,
         message: msg.message.text,
+        time:msg.createdAt,
+        seen:msg.seen,
       };
     });
     res.json(projectMessages);

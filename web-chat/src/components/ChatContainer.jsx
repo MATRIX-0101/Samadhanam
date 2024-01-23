@@ -1,11 +1,13 @@
 import React , { useState, useEffect, useRef, useReducer } from 'react';
+import {Box} from '@chakra-ui/react'
 import styled from 'styled-components';
 import Logout from './Logout';
 import ChatInput from './ChatInput';
 import { getAllMessagesRoute, sendMessageRoute } from '../utils/APIRoutes.js';
 import axios from 'axios';
 import { v4 as uuidv4} from "uuid";
-
+import {DateTime} from 'luxon';
+import { BsCheck2All } from 'react-icons/bs';
 export default function ChatContainer({currentChat,currentUser,socket,isOnline}) {
   // console.log(currentChat);
     const [messages, setMessages] = useState([]);
@@ -13,77 +15,7 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
     
     const scrollRef = useRef();
      
-
-    
-
-    // useEffect(() => {
-        
-    //     const getResponse = async() =>{
-    //         if(!currentChat){
-                
-    //        const response = await axios.post(getAllMessagesRoute, {
-    //         from: currentUser._id,
-    //         to: currentChat._id,
-    //        });
-    //        setMessages(response.data.reverse());
-    //        console.log("fetched values are",messages);
-    //     }
-        
-    //     getResponse();
-    
-        
-    // }
-       
-    //   }, [currentChat]);
-
-    //   useEffect(() => {
-    //     if(socket.current) {
-    //         socket.current.on("msg-receive",(msg)=>{
-    //             setArrivalMessage({ fromSelf: false, message: msg });
-                
-    //             // console.log(arrivalMessage)
-    //         });
-    //     }
-    // }, []);
-
-
-    // useEffect(() => {
-      // const getResponse = async () => {
-      //   if (currentChat) {
-      //     const response = await axios.post(getAllMessagesRoute, {
-      //       from: currentUser._id,
-      //       to: currentChat._id,
-      //     });
-      //     setMessages(response.data);
-      //   }
-      // };
-    
-      // getResponse();
-    
-      
-      // if (socket.current) {
-      //   socket.current.on("msg-receive", (msg,senderId) => {
-      //     // console.log(currentChat);
-      //     console.log("msg received");
-      //     if(senderId == currentChat._id){
-      //       console.log(true);
-      //       setArrivalMessage({ fromSelf: false, message: msg });
-      //     }
-      //     // console.log(senderId == currentChat._id);
-          
-          
-      //   });
-      // }
-      
-      // return () => {
-      //   if (socket.current) {
-      //     socket.current.off("msg-receive");
-      //   }
-      // };
-      
-    // }, [currentChat]);
-    
-    useEffect(() => {
+useEffect(() => {
       // console.log("Current chat ID:", currentChat?._id);
     
       const getResponse = async () => {
@@ -92,6 +24,8 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
             from: currentUser._id,
             to: currentChat._id,
           });
+          // console.log({ response.data. });
+          console.log(response.data);
           setMessages(response.data);
         }
       };
@@ -116,9 +50,65 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
         }
       };
     }, [currentChat]);
+
+    useEffect(()=>{
+      let lastMessageByAnotherUser = true;
+      lastMessageByAnotherUser = messages.length && messages[messages.length-1].fromSelf;
+      
+      if(!lastMessageByAnotherUser && socket.current ){
+        
+        socket.current.emit("setAllMessagesSeen", { 
+          currentUserId:currentUser._id,
+          currentChatId:currentChat._id
+        });
+      }
+      if(socket.current){
+        socket.current.on("messagesSeen",(currentChatId,currentUserId)=>{
+          
+          if(currentChat._id === currentUserId){
+            setMessages((prev) =>{
+              const updateMessages = prev.map((message) =>{
+                if(!message.seen){
+                  return{
+                    ...message,
+                    seen:true
+                  }
+                }
+                return message;
+              })
+              return updateMessages;
+            })
+        }
+        })
+      }
+    },[socket,messages,currentChat]);
+ 
+   //formate time
+   const formatTime = (timeString)=>{
+    const[hour,minute] = timeString.split(':').map(Number);
+    const period = hour >= 12?'PM':'AM';
+    const formattedHour = hour%12||12;
+    const formattedTime = `${formattedHour}:${minute < 10?'0':''}${minute}${period}`;
+    return formattedTime;
+   }
+    //handleUTC time 
+    const handleUTC = (timeString)=>{
+      const time = DateTime.fromISO(timeString,{zone:'utc'});
+      const istDateTime = time.setZone('Asia/Kolkata');
+      const formattedIST = istDateTime.toFormat('yyyy-MM-dd HH:mm:ss.SSS ZZZZ');
+      // console.log(formattedIST);
+      const timePart = formattedIST.slice(11,16);
+      
+      // console.log(timePart);
+      return formatTime(timePart);
+    }
+    const handleCurrentTime = ()=>{
+      const currentDateTime = new Date();
+        const timeIso = currentDateTime.toISOString();
+        // console.log(timeIso);
+        return timeIso;
+    }
     
-
-
     const handleSendMsg = async (msg) => {
         await axios.post(sendMessageRoute, {
             from: currentUser._id,
@@ -131,7 +121,8 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
             message: msg,
         });
         const msgs = [...messages];
-        msgs.push({ fromSelf: true, message: msg });
+        
+        msgs.push({ fromSelf: true, message: msg,time:handleCurrentTime(),seen:false});
         setMessages(msgs);
     };
 
@@ -139,7 +130,15 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
 
 
     useEffect(() => {
-        arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+        // arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+        if(arrivalMessage){
+        const msgs = [...messages];
+        const currentDateTime = new Date();
+        const timeIso = currentDateTime.toISOString();
+        msgs.push({fromSelf:false,message:arrivalMessage.message,time:handleCurrentTime(),seen:false})
+        console.log(msgs);
+        setMessages(msgs);
+        }
     }, [arrivalMessage]);
 
 
@@ -176,11 +175,17 @@ export default function ChatContainer({currentChat,currentUser,socket,isOnline})
                         <div ref={scrollRef} key={uuidv4()}>
                             <div className={`message ${message.fromSelf ? "sended":"received"}`}>
                                 <div className="content">
-                                    <p>
-                                        {message.message}
-                                    </p>
+                                {message.message}
+                               
+                                {/* <Box alignself={"flex-end"}  fontWeight={"bold"}> */}
+                                  {message.fromSelf?<BsCheck2All className = {`${message.seen?"seen":"unseen"}`}  size = {16}/>:null}
+                                {/* </Box> */}
+                
+                                    <div className="timePart">{handleUTC(message.time)}</div>
                                 </div>
+                                
                             </div>
+                            
                         </div>
                     );
                 })}
@@ -242,34 +247,59 @@ const Container = styled.div`
         &-thumb {
             background-color: #ffffff39;
             width: 0.1rem;
-            border-radius: 1rem;
+            border-radius: 0.2rem;
         }
     }
+   
     .message {
        display: flex;
        align-items: center;
        .content {
-          max-width: 40%;
+          max-width: 30%;
           overflow-wrap: break-word;
-          padding: 1rem;
+          padding: 0.4rem;
+          margin:0.1rem;
           font-size: 1.1rem;
-          border-radius: 1rem;
-          color: #d1d1d1;
+          border-radius: 0.5rem;
+          // color: #d1d1d1;
+          color:#dcf8c6;
        }
-       
-       
-    }
+      }
+     
+    
+     
     .sended {
         justify-content: flex-end;
         .content {
           background-color: #4f04ff21;
         }
+        margin-right:0.5rem;
      } 
+     
+     
+     
+    }
      .received {
         justify-content: flex-start;
         .content {
-          background-color: E7D9DE;
+          background-color: #075E54;
         }
+        margin-left:0.5rem;
+    }
+   
+    .seen{
+      color:blue;
+    }
+     
+     
+    }
+    .timePart{
+      // padding:0.001rem;
+      color:#777;
+      font-size:0.6rem;
+      postion:bottom-right;
+      
     }
   }
+  
 `;

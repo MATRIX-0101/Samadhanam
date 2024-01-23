@@ -90,7 +90,7 @@ useEffect(()=>{
 
         {
           isLoaded && currentChat === undefined ?(
-          <Welcome CurrentUser={currentUser} />) :
+          <Welcome CurrentUser={currentUser} socket={socket} />) :
           (
             <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} isOnline={checkStatus(currentChat)}/>
           )

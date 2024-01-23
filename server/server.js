@@ -1,4 +1,6 @@
+
 const express = require("express");
+const Message = require("./model/messageModel.js");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
@@ -89,8 +91,26 @@ io.on("connection",(socket)=>{
             socket.to(sendUserSocket).emit("msg-receive",data.message,data.from);   
         }
     });
-   
-
+   //here we will implement our seenallmessages and other part
+   socket.on("setAllMessagesSeen",async({currentUserId,currentChatId})=>{
+    const sendUserSocket = onlineUsers.get(currentChatId);
+    // console.log(`senderSocket is${sendUserSocket}`)
+     try {
+      const result = await Message.updateMany(
+      {"users.0":currentChatId,"users.1":currentUserId,seen:false},{$set:{seen:true}},
+     );
+      if(sendUserSocket){
+        socket.to(sendUserSocket).emit("messagesSeen",{currentChatId,currentUserId});
+      }
+      
+     
+           
+      
+     } catch (error) {
+      console.log(error);
+     }
+     
+   });
     //here logout part
 
     socket.on("logout",(socketID)=>{
