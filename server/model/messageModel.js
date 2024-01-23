@@ -14,12 +14,16 @@ const messageSchema = new mongoose.Schema(
         ref: "User",
         required: true,
     },
+   seen:{
+    type:Boolean,
+    default:false,
+   },
 },
-
 
     {
         timestamps: true,
     }
+    
 );
 
 module.exports = mongoose.model("Messages",messageSchema);
