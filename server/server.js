@@ -18,7 +18,6 @@ const path = require('path');
  app.use("/api/auth",userRoutes);
  app.use("/api/messages",messageRoute);
 
-
  //static files
  app.use(express.static(path.join(__dirname, './web-chat/build')));
 
@@ -42,7 +41,7 @@ mongoose.connect(process.env.LOCAL_DB_URL, {
 })
 
 const server = app.listen(process.env.PORT,()=> {
-    // console.log(`Server is connected on PORT : ${process.env.PORT}`);
+    // console.log(Server is connected on PORT : ${process.env.PORT});
 })
 
 const io = socket(server,{
@@ -100,7 +99,11 @@ io.on("connection",(socket)=>{
       {"users.0":currentChatId,"users.1":currentUserId,seen:false},{$set:{seen:true}},
      );
       if(sendUserSocket){
+<<<<<<< HEAD
         socket.to(sendUserSocket).emit("messagesSeen",{});
+=======
+        socket.to(sendUserSocket).emit("messagesSeen",{currentChatId,currentUserId});
+>>>>>>> master
       }
       
      

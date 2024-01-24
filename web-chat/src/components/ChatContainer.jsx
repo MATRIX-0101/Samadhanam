@@ -134,7 +134,6 @@ useEffect(() => {
 
     
 
-
     useEffect(() => {
         // arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
         if(arrivalMessage){
@@ -146,7 +145,6 @@ useEffect(() => {
         setMessages(msgs);
         }
     }, [arrivalMessage]);
-
 
     useEffect(()=> {
         scrollRef.current?.scrollIntoView({behaviour:"smooth"});
@@ -196,7 +194,6 @@ useEffect(() => {
                     );
                 })}
         </div>
-
 
         <ChatInput handleSendMsg={handleSendMsg} />
   </Container>

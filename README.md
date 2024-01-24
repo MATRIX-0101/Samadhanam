@@ -18,6 +18,10 @@
                   f) **_Admin Dashboard_**
                     :- Admin users have access to a dedicated dashboard.
                     :- Admins can view and manage user accounts to maintain student privacy and offer effective support.
+                  g) **_Seen and unseen_**
+                    :- User can see that their message is seen or not in real time
+                  f) **_Date and Time_**
+                    :- We can see time and date of the messages
 ##**_Tech Stacks_** :
               a) **_front-end_** : HTML,CSS,JavaScript,ReactJs,Bootstrap.
               b) **_Back-end_** : Node.Js.
