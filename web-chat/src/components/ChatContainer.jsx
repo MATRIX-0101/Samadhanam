@@ -41,6 +41,7 @@ useEffect(() => {
             // console.log("Received message from current chat");
             setArrivalMessage({ fromSelf: false, message: msg });
           }
+         
         });
       }
     
@@ -62,33 +63,15 @@ useEffect(() => {
           currentChatId:currentChat._id
         });
       }
-      // else if(socket.current){
-      //   socket.current.on("messagesSeen",(currentChatId,currentUserId)=>{
-          
-      //     if(currentChat._id === currentUserId){
-      //       setMessages((prev) =>{
-      //         const updateMessages = prev.map((message) =>{
-      //           if(!message.seen){
-      //             return{
-      //               ...message,
-      //               seen:true
-      //             }
-      //           }
-      //           return message;
-      //         })
-      //         return updateMessages;
-      //       })
-      //   }
-      //   })
-      // }
+      
     },[socket,messages,currentChat]);
 
     //new useEffect
     useEffect(()=>{
        if(socket.current){
-        socket.current.on("messagesSeen",(currentChatId,currentUserId)=>{
+        socket.current.on("messagesSeen",()=>{
           
-          if(currentChat._id !== currentUserId){
+          
             setMessages((prev) =>{
               const updateMessages = prev.map((message) =>{
                 if(!message.seen){
@@ -101,7 +84,7 @@ useEffect(() => {
               })
               return updateMessages;
             })
-        }
+        
         })
        }
     },[socket])
@@ -323,4 +306,3 @@ const Container = styled.div`
   }
   
 `;
-

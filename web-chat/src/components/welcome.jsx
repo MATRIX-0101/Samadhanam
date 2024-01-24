@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from "styled-components";
 import Robot from "../assets/smiley.gif";
+import Logout from './Logout';
 
-export default function Welcome( {currentUser} ) {
+export default function Welcome( {currentUser,socket} ) {
   return( 
   <>
     
     <Container>
+    <div className="logout"><Logout socket={socket} /></div>
+    
     <img src={Robot} alt="Robot" />
     <h1>
         Welcome, <span>{currentUser}!!</span> 
@@ -34,4 +37,9 @@ const Container = styled.div`
   span {
     color: #4e00ff;
   }
+  .logout{
+   margin-bottom:6.42225rem;
+   margin-left:55.6rem;
+  }
+ 
 `;

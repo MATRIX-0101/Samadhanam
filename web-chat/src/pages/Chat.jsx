@@ -60,7 +60,7 @@ useEffect(()=>{
          navigate("/setAvatar");
        }
       }
-   };
+   };  
    setAvatarAgain();
   
  }, [currentUser]);
@@ -86,11 +86,11 @@ useEffect(()=>{
   return (
     <Container>
       <div className="container">
-        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} onlineArray={onlineUsers} />
 
         {
           isLoaded && currentChat === undefined ?(
-          <Welcome CurrentUser={currentUser} />) :
+          <Welcome CurrentUser={currentUser} socket={socket} />) :
           (
             <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} isOnline={checkStatus(currentChat)}/>
           )
