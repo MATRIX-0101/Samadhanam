@@ -94,13 +94,13 @@ io.on("connection",(socket)=>{
    //here we will implement our seenallmessages and other part
    socket.on("setAllMessagesSeen",async({currentUserId,currentChatId})=>{
     const sendUserSocket = onlineUsers.get(currentChatId);
-    // console.log(`senderSocket is${sendUserSocket}`)
+    console.log(`senderSocket is${sendUserSocket}`)
      try {
       const result = await Message.updateMany(
       {"users.0":currentChatId,"users.1":currentUserId,seen:false},{$set:{seen:true}},
      );
       if(sendUserSocket){
-        socket.to(sendUserSocket).emit("messagesSeen",{currentChatId,currentUserId});
+        socket.to(sendUserSocket).emit("messagesSeen",{});
       }
       
      

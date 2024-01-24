@@ -41,6 +41,7 @@ useEffect(() => {
             // console.log("Received message from current chat");
             setArrivalMessage({ fromSelf: false, message: msg });
           }
+         
         });
       }
     
@@ -62,10 +63,15 @@ useEffect(() => {
           currentChatId:currentChat._id
         });
       }
-      if(socket.current){
-        socket.current.on("messagesSeen",(currentChatId,currentUserId)=>{
+      
+    },[socket,messages,currentChat]);
+
+    //new useEffect
+    useEffect(()=>{
+       if(socket.current){
+        socket.current.on("messagesSeen",()=>{
           
-          if(currentChat._id === currentUserId){
+          
             setMessages((prev) =>{
               const updateMessages = prev.map((message) =>{
                 if(!message.seen){
@@ -78,10 +84,10 @@ useEffect(() => {
               })
               return updateMessages;
             })
-        }
+        
         })
-      }
-    },[socket,messages,currentChat]);
+       }
+    },[socket])
  
    //formate time
    const formatTime = (timeString)=>{

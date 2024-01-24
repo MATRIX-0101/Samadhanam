@@ -2,7 +2,8 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import Logo from "../assets/smile.png"
 
-function Contacts({ contacts, currentUser, changeChat}) {
+function Contacts({ contacts, currentUser, changeChat,onlineArray}) {
+    console.log(onlineArray);
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
@@ -12,6 +13,7 @@ function Contacts({ contacts, currentUser, changeChat}) {
         
         return a.admin==='100';
     })
+    
     // console.log(Contacts);
     useEffect(()=>{
         if(currentUser){
@@ -41,7 +43,10 @@ function Contacts({ contacts, currentUser, changeChat}) {
             changeChat(contact); 
         };
        
-
+const checkStatus = (contactId)=>{
+    console.log(onlineArray.includes(contactId));
+   return onlineArray.includes(contactId);
+}
     // const changeCurrentChat = (index, contact) => { 
     //     setCurrentSelected(index);
     //     changeChat(contact); 
@@ -61,6 +66,7 @@ function Contacts({ contacts, currentUser, changeChat}) {
                     <div className="contacts">
                          {
                             contacts.map((a, index)=> {
+                                
                                 return (
                                     <div className={`contact ${index === currentSelected ?"selected" : ""
                                     }`} 
@@ -72,6 +78,7 @@ function Contacts({ contacts, currentUser, changeChat}) {
                                             src={`data:image/svg+xml;base64,${a.avatarImage}`} 
                                             alt="avatar"
                                              />
+                                             <div className={`${checkStatus(a._id)?"greenCircle":"circle"}`}></div>
                                         </div>
                                         <div className="username">
                                             {/* <h6>{contact.firstname}</h6> */}
@@ -125,6 +132,7 @@ function Contacts({ contacts, currentUser, changeChat}) {
                                             src={`data:image/svg+xml;base64,${contact.avatarImage}`} 
                                             alt="avatar"
                                              />
+                                             <div className={`${checkStatus(contact._id)?"greenCircle":"circle"}`}></div>
                                         </div>
                                         <div className="username">
                                             {/* <h6>{contact.firstname}</h6> */}
@@ -178,6 +186,31 @@ const Container = styled.div`
             text-transform: uppercase;
             
           }
+    }
+    .greenCircle{
+        // display: inline-block;
+      margin-left: 17px;
+      margin-right: 1px;
+      margin-bottom: -2px;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 0.5px;
+      border-color: black;
+      height: 10px;
+      width: 10px;
+      background-color:green
+    }
+    .circle{
+        margin-left: 17px;
+      margin-right: 1px;
+      margin-bottom: -2px;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 0.5px;
+      border-color: black;
+      height: 10px;
+      width: 10px;
+     background-color:red;
     }
     .contacts {
         display: flex;
