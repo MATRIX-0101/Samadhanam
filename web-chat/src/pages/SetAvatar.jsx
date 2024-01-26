@@ -93,6 +93,7 @@ function SetAvatar() {
                     data.push(buffer.toString("base64"));
                 }
                 setAvatars(data);
+                
                 setIsLoading(false);
             } catch (err){
                 toast.error("Error : please refresh page , please try again", toastOptions);
