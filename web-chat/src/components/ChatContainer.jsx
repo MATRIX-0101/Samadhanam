@@ -1,4 +1,6 @@
 import React , { useState, useEffect, useRef, useReducer } from 'react';
+import Join from './Join.jsx';
+
 import {Box} from '@chakra-ui/react'
 import styled from 'styled-components';
 import Logout from './Logout';
@@ -169,6 +171,7 @@ useEffect(() => {
                     {isOnline? <div className="online">online</div>:<div className="offline">offline</div>}
                 </div>
             </div>
+            <Join currentUser={currentUser}/>
             <Logout socket={socket}/>
         </div>
         

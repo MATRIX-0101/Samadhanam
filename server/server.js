@@ -99,11 +99,7 @@ io.on("connection",(socket)=>{
       {"users.0":currentChatId,"users.1":currentUserId,seen:false},{$set:{seen:true}},
      );
       if(sendUserSocket){
-<<<<<<< HEAD
         socket.to(sendUserSocket).emit("messagesSeen",{});
-=======
-        socket.to(sendUserSocket).emit("messagesSeen",{currentChatId,currentUserId});
->>>>>>> master
       }
       
      
