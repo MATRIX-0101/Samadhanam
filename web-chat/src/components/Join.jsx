@@ -3,7 +3,8 @@ import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import Meetingroom from "./Meetingroom";
 import { useState } from "react";
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import styled from 'styled-components';
+import { MdVideoCall } from "react-icons/md";
 export default function Join({currentUser}){
     const navigate = useNavigate();
     const [value,setValue] = useState("");
@@ -15,13 +16,35 @@ export default function Join({currentUser}){
     })
 
 const handleClick = ()=> {
+    
     navigate(`/meetingroom/${value}`);
+    // window.location.reload();
+    
 }
     return(
-        <div>
-            <button onClick={()=>handleClick()}>Join</button>
-        </div>
+        
+            <Button onClick={()=>handleClick()}>
+            <MdVideoCall/>
+            </Button>
+            
+       
         
     );
     
 }
+const Button = styled.button`
+
+   display: flex;
+   justify-items: center;
+   align-items:center;
+   padding: 0.5rem;
+   
+   border-radius: 0.5rem;
+   background-color: #9a86f3;
+   cursor: pointer;
+   svg{
+    font-size: 1.3rem;
+    color: white;
+   }
+
+ `;

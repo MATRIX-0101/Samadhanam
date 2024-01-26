@@ -170,10 +170,13 @@ useEffect(() => {
                     <h3>{currentChat.firstname}</h3>
                     {isOnline? <div className="online">online</div>:<div className="offline">offline</div>}
                 </div>
+               
             </div>
             <Join currentUser={currentUser}/>
             <Logout socket={socket}/>
+            
         </div>
+        
         
         <div className="chat-messages">
             {

@@ -140,6 +140,24 @@ color:blue;
 .collapse{
   border-radius: 20px;;
 }
+.card-meeting{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+ /* background-color: rgba(218, 107, 107, 0.779); */
+ /* width: 100vh; */
+
+
+}
+.card-inside{
+  background-color: rgb(173, 152, 152);
+  width:60%;
+  height: 75%;
+  border-radius: 10px;
+  box-shadow: 0px 10px 10px rgba(185, 164, 164, 0.749);
+  background: transparent;
+}
 
 /* .collapse  :hover{
 background-color: blue;
