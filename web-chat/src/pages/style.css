@@ -1,30 +1,24 @@
-
+/*
 button:hover{
   size: 2x;
 }
-/* Style for the background color */
-/* Style for the background image */
+
 .login {
   min-height: 100vh;
   background-image: url("./background.webp");
   background-size: cover;
   background-position: center;
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
-  /* Fallback background color */
 }
 
-/* ... (other CSS styles remain the same) ... */
 
-
-/* ... (other CSS styles remain the same) ... */
 
 .mainClass{
   text-align: center;
   max-width: 400px;
   background-attachment:fixed;
-  /* border: 1px solid #1b1a1bf0; */
  
   margin-left: 550px;
   margin-top: 10px;
@@ -33,7 +27,6 @@ button:hover{
   padding-right: 20px;
   width: 50%;
   background: transparent;
-  /* background-color: rgba(169, 155, 155, 0.639);  */
   border-radius: 17px;
  height: 450px;
   
@@ -86,7 +79,6 @@ color:blue;
 .loginLogo{
   text-align: center;
   width: 150px;
-  /* background: linear-gradient(45deg, #FFC107, #FF5722); */
   
   margin-top: 70px;
   margin-bottom: 20px;
@@ -132,7 +124,6 @@ color:blue;
   height: 5rem;
   display: grid;
   grid-template-columns: '3rem 2fr 3fr ';
-  /* box-shadow: 2px 2px 4px rgb(26 187 188 / 33%); */
   background-color:'#7bb198'
 }
 
@@ -145,8 +136,6 @@ color:blue;
   justify-content: center;
   align-items: center;
   height: 100vh;
- /* background-color: rgba(218, 107, 107, 0.779); */
- /* width: 100vh; */
 
 
 }
@@ -159,9 +148,7 @@ color:blue;
   background: transparent;
 }
 
-/* .collapse  :hover{
-background-color: blue;
-} */
 
 
+*/
 
