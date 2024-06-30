@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { loginRoute } from "../utils/APIRoutes";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import './style.css';
 function Login() {
   
   const navigate = useNavigate();
@@ -79,53 +78,60 @@ function Login() {
   return (
     
     <>
-    <div className="login">
-    <form className="form" onSubmit={(event) => handleSubmit(event)}>
-    
-    <div className="mainClass">
-      {/* <!-- Pills navs --> */}
-      
-        <div className="background">
-      <div className="loginLogo" >
-          <h4 >
-            <span className="logospan"><b>S</b></span>amadhanam
-          </h4>
+      <div className="login flex items-center justify-center min-h-screen p-4 bg-gray-100">
+        <form className="form bg-white p-8 rounded-lg shadow-md w-full max-w-sm" onSubmit={handleSubmit}>
+          <div className="mainClass">
+            <div className="background">
+              <div className="loginLogo text-center mb-6">
+                <h4 className="text-2xl font-bold text-gray-800">
+                  <span className="logospan text-blue-600"><b>S</b></span>amadhanam
+                </h4>
+              </div>
+              <div className="inputVals space-y-4">
+                <div>
+                  <input 
+                    type="email" 
+                    id="loginName" 
+                    className="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
+                    name="emailID" 
+                    placeholder="E-mail" 
+                    onChange={handleChange} 
+                  />
+                </div>
+                <div>
+                  <input 
+                    type="password" 
+                    id="loginPassword" 
+                    className="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
+                    name="password" 
+                    placeholder="Password" 
+                    onChange={handleChange} 
+                  />
+                </div>
+              </div>
+              <div className="row mb-4 flex justify-between items-center mt-6">
+                <button 
+                  type="submit" 
+                  className="btn-primary w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+                >
+                  Login
+                </button>
+              </div>
+              <div className="text-center mt-4">
+                <p className="text-gray-600">
+                  Not a member? <a href="register" className="text-blue-600 hover:underline">Register</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-        <div className="inputVals">
-          <input type="email" id="loginName" className="form-control" name="emailID" placeholder="E-mail" onChange={(e) => handleChange(e)}/>
-          <label className="form-label" htmlFor="loginName">
-          </label>
-        
-          <input type="password" id="loginPassword" className="form-control" name="password" placeholder="Password" onChange={(e) => handleChange(e)} />
-          <label className="form-label" htmlFor="loginPassword">
-          </label>
-        </div>
-
-        {/* <!-- 2 column grid layout --> */}
-        <div className="row mb-4">
-          <div className="col-md-6 d-flex justify-content-center"></div>
-
-          {/* <!-- Submit button --> */}
-          <button type="submit" className="btn-primary ">
-            Login
-          </button>
-
-          {/* <!-- Register buttons --> */}
-          <div className="text-center">
-            <p>
-              Not a member? <a href="register">Register</a>
-            </p>
-          </div>
-          </div>
-        </div>
-        </div>
+      <ToastContainer />
+      </>
     
-    </form>
-    </div>
-    <ToastContainer/>
-    </>
+ 
     
-  )
+  );
 }
 
 export default Login;
