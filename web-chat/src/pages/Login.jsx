@@ -1,4 +1,4 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginRoute } from "../utils/APIRoutes";
@@ -92,7 +92,7 @@ function Login() {
         `}
       </style>
 
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 to-purple-500 animate-fadeIn">
+      <div className="flex items-center justify-center min-h-screen animate-fadeIn">
         <form className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md animate-slideInUp" onSubmit={handleSubmit}>
           <div className="text-center mb-6">
             <h4 className="text-3xl font-bold text-gray-800 animate-fadeIn">
