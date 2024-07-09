@@ -142,7 +142,7 @@ function Register() {
                         </div>
                         <div className="col-md-6 mb-4">
                           <div className="form-outline">
-                            <input type="password" id="form3Example1n1" className="form-control form-control-lg" placeholder="Confirmpassword" name="confirmpassword" required onChange={(e) => handleChange(e)}/>
+                            <input type="password" id="form3Example1n1" className="form-control form-control-lg" placeholder="Confirm password" name="confirmpassword" required onChange={(e) => handleChange(e)}/>
                             <label className="form-label" htmlFor="form3Example1n1"></label>
                           </div>
                         </div>
@@ -180,41 +180,41 @@ function Register() {
                       <div className="row">
                         <div className="col-md-6 mb-4">
       
-                          <select className="select" placeholder="Option" name="year" required onChange={handleChange}>
-                            <option>Year</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                          </select>
+                        <select className="select border border-gray-300 rounded-md px-3 py-2 w-full" placeholder="Option" name="year" required onChange={handleChange}>
+                          <option>Year</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </select>
       
                         </div>
                         <div className="col-md-6 mb-4">
       
-                          <select className="select" placeholder="Hostel" name="hostel" required onChange={handleChange}>
-                            <option>Hostel</option>
-                            <option value="SVBH">SVBH</option>
-                            <option value="Tandon">Tandon</option>
-                            <option value="Patel">Patel</option>
-                            <option value="Malviya">Malviya</option>
-                            <option value="Tilak">Tilak</option>
-                            <option value="Raman">Raman</option>
-                            <option value="PGHostel">PG Hostel</option>
-                            <option value="KNGH">KNGH</option>
-                            <option value="DJ">DJ</option>
-                            <option value="Sarojininaidu">Sarojini Naidu</option>
-                          </select>
+                        <select className="select border border-gray-300 rounded-md px-3 py-2 w-full" placeholder="Hostel" name="hostel" required onChange={handleChange}>
+                          <option>Hostel</option>
+                          <option value="SVBH">SVBH</option>
+                          <option value="Tandon">Tandon</option>
+                          <option value="Patel">Patel</option>
+                          <option value="Malviya">Malviya</option>
+                          <option value="Tilak">Tilak</option>
+                          <option value="Raman">Raman</option>
+                          <option value="PGHostel">PG Hostel</option>
+                          <option value="KNGH">KNGH</option>
+                          <option value="DJ">DJ</option>
+                          <option value="Sarojininaidu">Sarojini Naidu</option>
+                        </select>
       
                         </div>
                       </div>
       
                       <div className="form-outline mb-4">
-                        <input type="text" id="form3Example9" className="form-control form-control-lg" placeholder="Phonenumber" name="phonenumber" required onChange={(e) => handleChange(e)}/>
+                        <input type="text" id="form3Example9" className="form-control form-control-lg" placeholder="Phone number" name="phonenumber" required onChange={(e) => handleChange(e)}/>
                         <label className="form-label" htmlFor="form3Example9"></label>
                       </div>
       
                       <div className="form-outline mb-4">
-                        <input type="text" id="form3Example90" className="form-control form-control-lg" placeholder="Registrationnumber" name="registrationnumber" required onChange={(e) => handleChange(e)}/>
+                        <input type="text" id="form3Example90" className="form-control form-control-lg" placeholder="Registration number" name="registrationnumber" required onChange={(e) => handleChange(e)}/>
                         <label className="form-label" htmlFor="form3Example90"></label>
                       </div>
       
