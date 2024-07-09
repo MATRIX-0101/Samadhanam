@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Chat from './pages/Chat';
 import Menu from './pages/Menu';
+import SolutionPage from './pages/Solutions'
 import SetAvatar from './pages/SetAvatar';
 import Meetingroom from './components/Meetingroom';
 import { io } from 'socket.io-client';
@@ -27,7 +28,7 @@ export default function App() {
       <Route path="/login" element={<Login />}></Route>
       <Route path="/chat" element={<Chat />}></Route>
       <Route path="/meetingroom/:roomId" element={<Meetingroom />}></Route>
-      {/* <Route path="/chat" element={<Chat socket={socket} />}></Route> */}
+      <Route path="/solution" element={<SolutionPage />}></Route>
     </Routes>
   </BrowserRouter>
   );
